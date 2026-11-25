@@ -31,10 +31,10 @@
     const n = (f) => D.products.filter(f).length;
     const link = (label, q, on, c, cls = "") => `<a class="${cls}${on ? " on" : ""}" href="catalogue.html${q}">${label}<small>${c}</small></a>`;
     const brandsHere = [...new Set(base().map((p) => p.brand))].sort();
-    $("#fpanel").innerHTML = `
+    $("#fpanel-in").innerHTML = `
       <div class="fpanel-close"><b style="font-size:20px">Filtres</b><button class="btn btn--sm btn--dark js-fclose">${t("Voir {n} résultats", { n: list().length })}</button></div>
       <div class="fbox"><h3>Rayons</h3>${link("Tout le catalogue", "", !st.cat, D.products.length)}
-        ${D.categories.map((c) => link(U.esc(c.label), `?cat=${c.id}`, st.cat === c.id && !st.sub, n((p) => p.category === c.id)) +
+        ${D.categories.map((c) => link(`<span class="fcat">${U.ic(c.icon)}${U.esc(c.label)}</span>`, `?cat=${c.id}`, st.cat === c.id && !st.sub, n((p) => p.category === c.id)) +
           (st.cat === c.id ? c.subs.map((s) => link(U.esc(s.label), `?cat=${c.id}&sub=${s.id}`, st.sub === s.id, n((p) => p.sub === s.id), "sub")).join("") : "")).join("")}</div>
       <div class="fbox"><h3>Offres</h3><label class="toggle"><input type="checkbox" id="f-promo" ${st.promo ? "checked" : ""}><span>En promotion</span><small>${base().filter((p) => p.oldPrice).length}</small></label>
         <label class="toggle"><input type="checkbox" id="f-fav" ${st.fav ? "checked" : ""}><span>Mes favoris</span><small>${Store.get().favs.length}</small></label></div>
@@ -73,7 +73,12 @@
     if (st.min) p.set("min", st.min); if (st.max) p.set("max", st.max); if (st.sort !== "pertinence") p.set("sort", st.sort);
     history.replaceState(null, "", U.url("catalogue.html" + (p.toString() ? "?" + p : "")));
   }
-  function update() { filters(); head(); render(); sync(); }
+  function update() {
+    filters(); head(); render(); sync();
+    const qs = $("#q-side"); if (qs && document.activeElement !== qs) qs.value = st.q;
+    const qt = $("#q-top"); if (qt && document.activeElement !== qt) qt.value = st.q;
+  }
+  U.sideSearch($("#fsearch"), (q) => { st.q = q; update(); });
 
   $("#fpanel").addEventListener("change", (e) => {
     const t = e.target;

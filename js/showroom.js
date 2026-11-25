@@ -95,6 +95,26 @@
       <span class="cat-img">${U.pimg(c.img, "")}</span><b>${esc(c.short || c.label)}</b><small>${t("{n} articles", { n: D.products.filter((p) => p.category === c.id).length })}</small></a>`).join("") +
     (promos.length ? `<a class="cat cat--promo" href="catalogue.html?promo=1" data-reveal><span class="cat-img"><b>-${mx}%</b></span><b>Promotions</b><small>${t("{n} offres", { n: promos.length })}</small></a>` : "");
 
+  /* ——— Colonne gauche : recherche + rayons + offres (comme le catalogue) ——— */
+  const cnt = (f) => D.products.filter(f).length;
+  let favN = 0; try { favN = Store.get().favs.length; } catch (e) {}
+  const offers = [["catalogue.html?promo=1", "tag", "Promotions", promos.length], ["catalogue.html?sort=new", "spark", "Nouveautés", cnt((p) => p.isNew)],
+    ["catalogue.html?sort=best", "star", "Meilleures ventes", cnt((p) => p.best)], ["catalogue.html?fav=1", "heart", "Mes favoris", favN]].filter((o) => o[3] || o[2] === "Mes favoris");
+  $("#srside").innerHTML = `<div class="sbox sbox--q" id="sside-q"></div>
+    <div class="sbox"><h3>${esc(tr("Rayons"))}</h3><nav class="srays">${D.categories.map((c) => `<div class="sray">
+        <a href="catalogue.html?cat=${c.id}"><span class="sray-ic">${U.ic(c.icon)}</span><span class="sray-l">${esc(c.label)}</span><small>${cnt((p) => p.category === c.id)}</small></a>
+        ${c.subs.length > 1 ? `<button class="sray-tg" type="button" aria-expanded="false" aria-label="${esc(c.label)}">${U.ic("right")}</button>
+        <div class="sray-subs" hidden>${c.subs.map((sb) => `<a href="catalogue.html?cat=${c.id}&sub=${sb.id}"><span>${esc(sb.label)}</span><small>${cnt((p) => p.sub === sb.id)}</small></a>`).join("")}</div>` : ""}</div>`).join("")}
+      <div class="sray sray--all"><a href="catalogue.html"><span class="sray-ic">${U.ic("grid")}</span><span class="sray-l">${esc(tr("Tout le catalogue"))}</span><small>${D.products.length}</small></a></div></nav></div>
+    <div class="sbox sbox--off"><h3>${esc(tr("Offres"))}</h3>${offers.map(([h, i, l, n]) => `<a class="soff" href="${h}"><span class="sray-ic">${U.ic(i)}</span><span class="sray-l">${esc(tr(l))}</span><small>${n}</small></a>`).join("")}</div>
+    <div class="scard"><small>${esc(tr("Le showroom"))}</small><b>${esc(C.name)}</b><span>${esc(C.hours || tr("Du lundi au samedi"))}</span>
+      <a class="btn btn--wa btn--sm js-wa" href="#" target="_blank" rel="noopener">${U.waIcon} ${esc(tr("Écrire au showroom"))}</a></div>`;
+  U.sideSearch($("#sside-q"));
+  $$(".sray-tg").forEach((b) => b.addEventListener("click", () => {
+    const open = b.getAttribute("aria-expanded") !== "true";
+    b.setAttribute("aria-expanded", open); b.nextElementSibling.hidden = !open; b.parentElement.classList.toggle("open", open);
+  }));
+
   /* ——— Ventes flash ——— */
   if (promos.length) {
     $("#flash").innerHTML = promos.map(U.card).join("");

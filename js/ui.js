@@ -74,7 +74,7 @@
   const media = (p, cls = "", eager = false) => p.img ? pimg(p.img, p.name, cls, eager) : studio(p.svg);
 
   /* Pictos de ligne */
-  const P = {
+  const P = { star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>', spark: '<path d="M12 3v5M12 16v5M3 12h5M16 12h5M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>', heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',
     bag: '<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/>', menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', close: '<path d="M6 6l12 12M18 6L6 18"/>',
     compare: '<path d="M8 4v16M16 4v16M4 8h8M12 16h8"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>', left: '<path d="M15 6l-6 6 6 6"/>', right: '<path d="M9 6l6 6-6 6"/>',
@@ -229,6 +229,28 @@
     document.addEventListener("click", (e) => { if (!e.target.closest(".search")) box.hidden = true; });
   }
 
+  /* ——— Recherche de la colonne gauche (accueil showroom + catalogue) ——— */
+  function sideSearch(box, onLive) {
+    box.innerHTML = `<form class="ssearch" action="catalogue.html" role="search" autocomplete="off"><input type="hidden" name="s" value="${esc(C.id)}">
+      <label class="sr" for="q-side">${esc(tr("Rechercher"))}</label><input id="q-side" name="q" type="search" placeholder="${esc(tr("Rechercher un article…"))}">
+      <button aria-label="${esc(tr("Rechercher"))}">${ic("search")}</button></form><div class="ssug" hidden></div>`;
+    const f = box.querySelector("form"), i = f.querySelector("#q-side"), sg = box.querySelector(".ssug");
+    if (onLive) {
+      let tm; i.addEventListener("input", () => { clearTimeout(tm); tm = setTimeout(() => onLive(i.value.trim()), 180); });
+      f.addEventListener("submit", (e) => { e.preventDefault(); clearTimeout(tm); onLive(i.value.trim()); });
+      return i;
+    }
+    i.addEventListener("input", () => {
+      const q = i.value.trim(), r = searchProducts(q, 5);
+      if (!q) { sg.hidden = true; return; }
+      sg.innerHTML = r.length ? r.map((p) => `<a href="${productUrl(p)}"><span class="ssug-img">${media(p)}</span><span><small>${esc(p.brand)}</small>${esc(p.name)}</span></a>`).join("") +
+        `<a class="ssug-all" href="catalogue.html?q=${encodeURIComponent(q)}">${esc(t("Voir tous les résultats pour « {q} »", { q }))} →</a>`
+        : `<p class="ssug-empty">${esc(t("Aucun produit pour « {q} ».", { q }))} <a href="${wa(tr("Bonjour, je cherche :") + " " + q)}" target="_blank" rel="noopener">${esc(tr("Demander à un conseiller"))}</a></p>`;
+      sg.hidden = false;
+    });
+    return i;
+  }
+
   /* ——— Toast, compteurs, comparateur ——— */
   let tt;
   function toast(msg, link) {
@@ -310,5 +332,5 @@
     bindSearch(); counts(); reveal();
   }
 
-  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, norm };
+  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, norm };
 })();
