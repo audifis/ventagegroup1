@@ -537,6 +537,23 @@ footer{background:var(--night);color:rgba(255,255,255,.65);padding:90px 0 34px;f
   .phero>.ph{width:100%;height:58%;-webkit-mask-image:linear-gradient(0deg,transparent 0%,#000 45%);mask-image:linear-gradient(0deg,transparent 0%,#000 45%)}
   .phero::after{background:linear-gradient(0deg,#0b1636 0%,#0b1636 40%,rgba(11,22,54,.75) 52%,rgba(11,22,54,0) 68%)!important}
 }
+@media (min-width:821px){
+[dir=rtl] .hx{background:radial-gradient(900px 620px at 92% 28%,rgba(46,84,190,.38),transparent 62%),radial-gradient(700px 500px at 70% 110%,rgba(245,210,31,.08),transparent 60%),linear-gradient(180deg,#0b1636,#070f26)}
+[dir=rtl] .hx-stage{right:30%;left:0;-webkit-mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.25) 12%,rgba(0,0,0,.8) 30%,#000 44%);mask-image:linear-gradient(270deg,transparent 0%,rgba(0,0,0,.25) 12%,rgba(0,0,0,.8) 30%,#000 44%)}
+[dir=rtl] .hx-slide{clip-path:inset(0 100% 0 0)}
+[dir=rtl] .hx-slide.prev,[dir=rtl] .hx-slide.on{clip-path:inset(0 0 0 0)}
+[dir=rtl] .hx-shade{background:linear-gradient(270deg,rgba(11,22,54,.55) 0%,rgba(11,22,54,0) 45%),linear-gradient(0deg,rgba(7,15,38,.78) 0%,rgba(7,15,38,0) 36%),linear-gradient(180deg,rgba(7,15,38,.6) 0%,rgba(7,15,38,0) 24%)}
+[dir=rtl] .hx-frame{inset:calc(var(--hh) + 18px) auto clamp(20px,3vw,44px) clamp(20px,3vw,44px)}
+[dir=rtl] .hx-count{right:auto;left:clamp(44px,5vw,88px)}
+[dir=rtl] .hx-card{right:auto;left:clamp(44px,5vw,88px)}
+}
+@media (min-width:821px) and (max-width:1100px){[dir=rtl] .hx-stage{right:42%;left:0}}
+[dir=rtl] .hx-nav button{text-align:right}
+[dir=rtl] .hx-nav i{left:auto;right:0}
+html[lang=ar]{--serif:"Amiri","Cormorant Garamond",serif;--sans:"Tajawal","Manrope",system-ui,sans-serif}
+html[lang=ar] body{font-size:16px}
+html[lang=ar] .display,html[lang=ar] .h2{letter-spacing:0;line-height:1.25}
+html[lang=ar] .kicker,html[lang=ar] .eyebrow{letter-spacing:0;text-transform:none}
 </style>
 </head>
 <body>
@@ -582,6 +599,7 @@ footer{background:var(--night);color:rgba(255,255,255,.65);padding:90px 0 34px;f
 <div class="toast" id="toast"></div>
 
 <script src="js/catalog.js?v=c42a8c12"></script>
+<script>try{var s=localStorage.getItem("vg-lang"),n=(navigator.language||"").slice(0,2);if(s==="ar"||(!s&&n==="ar"))document.write('<script src="js/ar.js?v=d2541cbc"><\/script>')}catch(e){}</script>
 <script src="js/i18n-data.js?v=594a3079"></script>
 <script>
 /* ================= CONFIG ================= */
@@ -589,6 +607,7 @@ const CFG={whatsapp:"240333090553",eurRate:655.957};
 
 
 /* ================= I18N ================= */
+const D_AR={"nav_showrooms":"صالات العرض","nav_cats":"الأقسام","nav_offers":"العروض","nav_group":"المجموعة","contact":"اتصل بنا","country":"غينيا الاستوائية","hero_k":"مالابو · منذ أكثر من 20 عامًا","hero_t1":"اثنتا عشرة صالة عرض.","hero_t2":"اسم واحد.","hero_p":"الموضة والمنزل والتقنية والبناء والصحة والسيارات: كل عالم فينتاج في متناول يدك.","cta_sr":"استكشف صالات العرض","cta_cat":"الكتالوج","scroll":"مرّر","intro_k":"مجموعة فينتاج","intro":"منذ أكثر من عشرين عامًا، تأتي مالابو إلى فينتاج <em>لتتأنّق وتتجهّز وتبني وتتعالج.</em> اثنتا عشرة صالة عرض، ومستوى واحد من الإتقان.","st_y":"عامًا في مالابو","st_s":"صالات عرض","st_c":"قسمًا","st_sec":"قطاعات نشاط","sr_k":"صالات العرض","sr_t":"مجموعة واحدة، <em>اثنا عشر عنوانًا.</em>","all":"الكل","visit":"زيارة","cat_k":"الأقسام","cat_t":"المجموعة كلها، <em>قسمًا بعد قسم.</em>","items":"منتجًا","item":"منتج","sel_k":"مختارات","sel_t":"أساسيات <em>فينتاج.</em>","t_best":"الأكثر مبيعًا","t_new":"وصل حديثًا","t_promo":"العروض","off_k":"عروض مميزة","off_t":"أفضل ما في الموسم، <em>بأسعار استثنائية.</em>","see_all":"عرض الكل","made_k":"صُنع في غينيا الاستوائية","made_t":"مصانعنا، <em>في حياتكم اليومية.</em>","made_p":"تدير مجموعة فينتاج وحدات إنتاج خاصة بها. منتجات مصنوعة محليًا وتُباع في صالات عرضنا.","m1":"المراتب","m2":"الدهانات","m3":"خزانات المياه","pro_k":"فينتاج برو","pro_t":"مشروع <em>كبير؟</em>","pro_p":"ورش بناء وفنادق ومكاتب وأساطيل مركبات: محاور واحد لصالات العرض الاثنتي عشرة، وعرض سعر موحّد.","pp1":"عرض سعر لعدة صالات","pp1s":"عرض واحد بالأسعار","pp2":"أسعار الكميات","pp2s":"للشركات والموزعين","pp3":"التوصيل والتركيب","pp3s":"في الورشة أو في الموقع","pp4":"مستشار مخصص","pp4s":"من الاختيار حتى الفاتورة","pro_cta":"اطلب عرض سعر","sv1":"نصيحة شخصية","sv1s":"مستشار يجيبك عبر واتساب.","sv2":"الاستلام من صالة العرض","sv2s":"اطلب عبر الإنترنت واستلم من المتجر.","sv3":"التوصيل في مالابو","sv3s":"المواعيد تُؤكَّد عند الطلب.","sv4":"فضاء المهنيين","sv4s":"عروض أسعار وأسعار كميات.","nl_k":"نشرة فينتاج","nl_t":"الجديد، <em>قبل الجميع.</em>","nl_ph":"بريدك الإلكتروني","nl_b":"اشترك","nl_ok":"شكرًا، إلى اللقاء قريبًا.","ft_about":"منذ أكثر من 20 عامًا في مالابو: تجارة وصحة وسيارات وصناعة وعقارات.","price_in":"الأسعار معروضة بـ","home":"الرئيسية","catalogue":"الكتالوج","sort_rel":"الأكثر صلة","sort_asc":"السعر تصاعديًا","sort_desc":"السعر تنازليًا","sort_off":"أكبر التخفيضات","refine":"تحسين البحث","f_promo":"عليه عرض","f_new":"وصل حديثًا","f_sr":"صالة العرض","f_cat":"القسم","filters":"الفلاتر","empty_t":"لا توجد منتجات","empty_p":"وسّع اختيارك.","avail_n":"متوفر في {n} صالات عرض","avail_1":"متوفر في صالة عرض واحدة","write_sr":"راسل صالة العرض","hours":"الإثنين – السبت","photos":"صور","on_quote":"حسب عرض السعر","np_ph":"السعر في الصيدلية","np_lab":"السعر عند الطلب","add":"أضف إلى السلة","add_s":"أضف","order_wa":"اطلب عبر واتساب","quote_wa":"اطلب عرض سعر عبر واتساب","avail_at":"متوفر لدى","see_sr":"عرض","bag":"السلة","bag_e":"سلتك فارغة","bag_ep":"استلهم من صالات عرضنا.","total":"المجموع التقديري","bag_note":"يؤكد المستشار التوفر والتوصيل.","added":"أُضيف إلى السلة","f_newb":"جديد","srp_t":"صالات العرض <em>الاثنتا عشرة</em>","srp_p":"خمسة عوالم، واثنا عشر عنوانًا في مالابو.","cat_all":"كل الكتالوج","cat_p":"ابحث حسب صالات العرض والأقسام والماركات.","offers_t":"عروض <em>مميزة</em>","ct_t":"لنتحدث عن <em>مشروعكم.</em>","ct_p":"مستشار يجيبكم عبر واتساب أو الهاتف أو في صالة العرض.","hq":"المقر · مالابو","eu":"فرنسا / أوروبا","write_one":"راسل صالة عرض","s_ph":"عمّ تبحث؟","s_sr":"صالات العرض","s_cat":"الأقسام","s_prod":"المنتجات","s_none":"لا توجد نتائج","visit_sr":"زيارة صالة العرض","nf":"الصفحة غير موجودة","more":"عرض المزيد من المنتجات","wa_hello":"مرحبًا مجموعة فينتاج، أرغب في الحصول على نصيحة.","wa_cart":"مرحبًا فينتاج، أرغب في طلب:","wa_sr":"مرحبًا {s}، أرغب في الاستفسار.","wa_now":"مرحبًا {s}، أرغب في طلب {q} × {p}.","wa_quote":"مرحبًا {s}، أرغب في عرض سعر لـ: {p}.","wa_pro":"مرحبًا فينتاج برو، أرغب في عرض سعر لمشروع مهني.","checkout_at":"إتمام الطلب لدى","bag_multi":"لكل صالة عرض سلتها: يصل الطلب مباشرة إلى المستشار المناسب.","wa_total":"المجموع التقديري"};
 const D={
 nav_showrooms:["Showrooms","Showrooms","Showrooms"],nav_cats:["Rayons","Secciones","Departments"],nav_offers:["Offres","Ofertas","Offers"],nav_group:["Le groupe","El grupo","The group"],contact:["Contact","Contacto","Contact"],
 country:["Guinée équatoriale","Guinea Ecuatorial","Equatorial Guinea"],
@@ -650,12 +669,12 @@ wa_pro:["Bonjour Ventage Pro, je souhaite un devis pour un projet professionnel.
 checkout_at:["Finaliser chez","Finalizar en","Check out at"],bag_multi:["Chaque showroom a son panier : la commande part directement au bon conseiller.","Cada showroom tiene su cesta: el pedido va directamente al asesor correcto.","Each showroom has its own bag: your order goes straight to the right advisor."],
 wa_total:["Total estimé","Total estimado","Estimated total"]
 };
-const LANGS=["fr","es","en"],LOC={fr:"fr-FR",es:"es-ES",en:"en-GB"};
+const LANGS=["fr","es","en","ar"],LOC={fr:"fr-FR",es:"es-ES",en:"en-GB",ar:"ar-u-nu-latn"};
 let L="fr",CUR="XAF";
 try{L=localStorage.getItem("vg-lang")||(navigator.language||"fr").slice(0,2);if(!LANGS.includes(L))L="fr";CUR=localStorage.getItem("vg-cur")||"XAF";}catch(e){}
 const li=()=>LANGS.indexOf(L);
-const t=(k,v={})=>{let s=(D[k]||[k])[li()]||D[k][0];for(const x in v)s=s.replace("{"+x+"}",v[x]);return s;};
-const tr=s=>{if(s==null)return"";if(typeof s!=="string")return s[li()]||s[0];const p=s.split("|");if(p.length>1)return p[li()]||p[0];if(L!=="fr"){const d=(window.SODISCOM_I18N_DATA||{})[L];if(d&&d[s])return d[s];}return s;};
+const t=(k,v={})=>{let s=(L==="ar"&&D_AR[k])||(D[k]||[k])[li()]||(D[k]||[k])[0];for(const x in v)s=s.replace("{"+x+"}",v[x]);return s;};
+const tr=s=>{if(s==null)return"";if(typeof s!=="string")return s[li()]||s[0];const p=s.split("|");if(p.length>1)return L==="ar"?((window.VG_AR||{})[p[0]]||p[0]):(p[li()]||p[0]);if(L!=="fr"){const d=(window.SODISCOM_I18N_DATA||{})[L];if(d&&d[s])return d[s];}return s;};
 
 /* ================= ICÔNES ================= */
 const I={
@@ -970,10 +989,11 @@ let LB={s:null,i:0};
 function lbShow(){const s=LB.s,im=$("#lbPh img");im.classList.remove("broken");im.dataset.orig=img(s,LB.i);im.src=OPT(img(s,LB.i),1920);$("#lbCap").textContent=`${s.name} · ${LB.i+1} / ${s.img.length}`;}
 
 /* ================= CHROME ================= */
+function arFonts(){if(L!=="ar"||document.getElementById("arf"))return;const l=document.createElement("link");l.id="arf";l.rel="stylesheet";l.href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:wght@400;700&display=swap";document.head.append(l);}
 function chrome(){
-  document.documentElement.lang=L;
+  document.documentElement.lang=L;document.documentElement.dir=L==="ar"?"rtl":"ltr";arFonts();
   $("#curLang").textContent=L.toUpperCase();$("#curCur").textContent=CUR;
-  $("#langMenu").innerHTML=[["fr","Français"],["es","Español"],["en","English"]].map(([k,n])=>`<button data-lang="${k}" class="${k===L?"on":""}">${n}</button>`).join("");
+  $("#langMenu").innerHTML=[["fr","Français"],["es","Español"],["en","English"],["ar","العربية"]].map(([k,n])=>`<button data-lang="${k}" class="${k===L?"on":""}">${n}</button>`).join("");
   $("#curMenu").innerHTML=[["XAF","FCFA · XAF"],["EUR","Euro · EUR"]].map(([k,n])=>`<button data-cur="${k}" class="${k===CUR?"on":""}">${n}</button>`).join("");
   const first=SHOWROOMS[0];
   $("#nav").innerHTML=`
@@ -1041,7 +1061,7 @@ document.addEventListener("click",e=>{
   const x=e.target;
   const ad=x.closest("[data-add]");if(ad){e.preventDefault();add(ad.dataset.add,1);return;}
 
-  const lg=x.closest("[data-lang]");if(lg){L=lg.dataset.lang;try{localStorage.setItem("vg-lang",L)}catch(_){};chrome();closeDD();$("#mnav").classList.remove("on");route();return;}
+  const lg=x.closest("[data-lang]");if(lg){L=lg.dataset.lang;try{localStorage.setItem("vg-lang",L)}catch(_){};const go=()=>{chrome();closeDD();$("#mnav").classList.remove("on");route();};if(L==="ar"&&!window.VG_AR){const sc=document.createElement("script");sc.src="js/ar.js?v=d2541cbc";sc.onload=go;sc.onerror=go;document.head.append(sc);}else go();return;}
   const cu=x.closest("[data-cur]");if(cu){CUR=cu.dataset.cur;try{localStorage.setItem("vg-cur",CUR)}catch(_){};chrome();closeDD();$("#mnav").classList.remove("on");route();return;}
   const dd=x.closest("[data-dd]");if(dd){const p=dd.parentElement,was=p.classList.contains("open");closeDD();if(!was)p.classList.add("open");return;}
   if(!x.closest(".dd"))closeDD();

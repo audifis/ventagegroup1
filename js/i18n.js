@@ -7,7 +7,8 @@
   const LANGS = {
     fr: { name: "Français", short: "FR", dir: "ltr", loc: "fr-FR" },
     es: { name: "Español", short: "ES", dir: "ltr", loc: "es-ES" },
-    en: { name: "English", short: "EN", dir: "ltr", loc: "en-GB" }
+    en: { name: "English", short: "EN", dir: "ltr", loc: "en-GB" },
+    ar: { name: "العربية", short: "AR", dir: "rtl", loc: "ar-u-nu-latn" }
   };
   const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
   function detect() {
@@ -18,7 +19,7 @@
     return n || "fr";
   }
   const lang = detect(), meta = LANGS[lang];
-  const DICT = Object.assign({}, (window.SODISCOM_I18N_DATA || {})[lang] || {}, (window.VG_UI || {})[lang] || {}, (window.VG_DICT || {})[lang] || {});
+  const DICT = Object.assign({}, (window.SODISCOM_I18N_DATA || {})[lang] || {}, (window.VG_UI || {})[lang] || {}, (window.VG_DICT || {})[lang] || {}, lang === "ar" ? window.VG_AR || {} : {});
   const CN = (window.SODISCOM_CONFIG || {}).name || "Ventage Group";
   const brand = (s) => (s.indexOf("SODISCOM") < 0 ? s : s.replace(/SODISCOM Pro/g, "Ventage Pro").replace(/SODISCOM-GE|SODISCOM/g, CN));
   const tr = (s) => {
@@ -32,7 +33,7 @@
 
   document.documentElement.lang = lang;
   document.documentElement.dir = meta.dir;
-  if (false) {
+  if (lang === "ar") {
     const l = document.createElement("link"); l.rel = "stylesheet";
     l.href = "https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Amiri:wght@400;700&display=swap";
     document.head.append(l);

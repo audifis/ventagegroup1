@@ -272,7 +272,7 @@
     }, true);
     let x0 = null;
     panel.addEventListener("touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
-    panel.addEventListener("touchend", (e) => { if (x0 != null && x0 - e.changedTouches[0].clientX > 70) close(); x0 = null; });
+    panel.addEventListener("touchend", (e) => { if (x0 != null && (x0 - e.changedTouches[0].clientX) * (document.documentElement.dir === "rtl" ? -1 : 1) > 70) close(); x0 = null; });
     return { open, close };
   }
   /* Rangée de rayons défilante (mobile) : bouton « Rayons » + un raccourci par rayon */
