@@ -12,7 +12,7 @@
   const ph1 = (a, b) => rank(b) - rank(a);
   const promos = D.products.filter((p) => p.oldPrice).sort((a, b) => ph1(a, b) || D.discount(b) - D.discount(a));
   const pickDeal = (cat) => promos.find((p) => p.category === cat && rank(p) === 2) || D.products.find((p) => p.category === cat && rank(p) === 2) || promos.find((p) => p.category === cat && p.img) || D.products.find((p) => p.category === cat && p.img) || promos.find((p) => p.category === cat) || D.products.find((p) => p.category === cat);
-  const slides = [{ img: S.photos[0], k: `${C.name} · Malabo`, l1: tr(fr(S.tag)), l2: tr(fr(S.plaque)) + ".", p: tr(fr(S.desc)),
+  const slides = [{ img: S.photos[0], k: `${C.name}${U.AR_NAME ? " · " + U.AR_NAME : ""} · ${tr("Malabo")}`, l1: tr(fr(S.tag)), l2: tr(fr(S.plaque)) + ".", p: tr(fr(S.desc)),
     ctas: `<a class="btn btn--gold btn--lg" href="catalogue.html">${tr("Explorer la boutique")} <span class="arr" aria-hidden="true">→</span></a><a class="btn btn--glass btn--lg js-wa" href="#" target="_blank" rel="noopener">${tr("Parler à un conseiller")}</a>` }];
   D.categories.slice(0, 3).forEach((c, i) => {
     const d = pickDeal(c.id);
@@ -35,7 +35,7 @@
   const hero = $("#hero");
 
   /* ——— Rideau d'ouverture (comme la boutique d'origine) ——— */
-  $("#pl-name").textContent = C.name; $("#pl-title").textContent = tr(fr(S.plaque));
+  $("#pl-name").textContent = C.name; if (U.AR_NAME) $("#pl-name").insertAdjacentHTML("afterend", `<span class="plaque-arn" data-noi18n>${esc(U.AR_NAME)}</span>`); $("#pl-title").textContent = tr(fr(S.plaque));
   const th = $("#theatre");
   const nav = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0]) || {};
   let internal = false; try { internal = !!document.referrer && new URL(document.referrer).origin === location.origin && nav.type !== "reload" && /showroom|catalogue|produit|panier|contact/.test(document.referrer); } catch (e) {}

@@ -550,6 +550,9 @@ footer{background:var(--night);color:rgba(255,255,255,.65);padding:90px 0 34px;f
 @media (min-width:821px) and (max-width:1100px){[dir=rtl] .hx-stage{right:42%;left:0}}
 [dir=rtl] .hx-nav button{text-align:right}
 [dir=rtl] .hx-nav i{left:auto;right:0}
+.arn{display:block;font-family:"Tajawal",var(--sans);font-size:max(.42em,13px);font-weight:600;line-height:1.3;letter-spacing:0;margin-top:.35em;opacity:.88;font-style:normal}
+.arn--s{font-size:12px;margin-top:2px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hx-nav b .arn{font-size:12px}
 html[lang=ar]{--serif:"Amiri","Cormorant Garamond",serif;--sans:"Tajawal","Manrope",system-ui,sans-serif}
 html[lang=ar] body{font-size:16px}
 html[lang=ar] .display,html[lang=ar] .h2{letter-spacing:0;line-height:1.25}
@@ -599,7 +602,7 @@ html[lang=ar] .kicker,html[lang=ar] .eyebrow{letter-spacing:0;text-transform:non
 <div class="toast" id="toast"></div>
 
 <script src="js/catalog.js?v=c42a8c12"></script>
-<script>try{var s=localStorage.getItem("vg-lang"),n=(navigator.language||"").slice(0,2);if(s==="ar"||(!s&&n==="ar"))document.write('<script src="js/ar.js?v=d2541cbc"><\/script>')}catch(e){}</script>
+<script>try{var s=localStorage.getItem("vg-lang"),n=(navigator.language||"").slice(0,2);if(s==="ar"||(!s&&n==="ar"))document.write('<script src="js/ar.js?v=a8f09ec1"><\/script>')}catch(e){}</script>
 <script src="js/i18n-data.js?v=594a3079"></script>
 <script>
 /* ================= CONFIG ================= */
@@ -745,6 +748,7 @@ const prodUrl=p=>`produit.html?s=${p.sr}&id=${encodeURIComponent(p.id)}`;
 const OPT=(u,w)=>`https://wsrv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,""))}&w=${w}&output=webp&q=76&we`;
 const djU=k=>{const m=/^dj:(.+):(\d+)$/.exec(k||"");return m?`https://cdn.dummyjson.com/product-images/${m[1]}/1.webp`:null;};
 const usU=(k,w=480)=>/^us:/.test(k||"")?`https://images.unsplash.com/${k.slice(3)}?auto=format&fit=crop&w=${w}&h=${w}&q=70`:null;
+const arn=(s,c="arn")=>L==="ar"&&window.VG_AR_SR&&VG_AR_SR[s.id]?`<span class="${c}" lang="ar">${VG_AR_SR[s.id]}</span>`:"";
 const pphoto=p=>!p.pimg?null:usU(p.pimg)?usU(p.pimg):/^vm:/.test(p.pimg)?`assets/mall/${p.pimg.slice(3)}-400.webp`:djU(p.pimg)?OPT(djU(p.pimg),480):/^https?:/.test(p.pimg)?p.pimg:`assets/img/${p.pimg}-640.webp`;
 const porig=p=>djU(p.pimg)||usU(p.pimg,1080)||"";
 const off=p=>p.old&&p.price?Math.round((1-p.price/p.old)*100):0;
@@ -771,7 +775,7 @@ function card(p){
 function tile(s,cls=""){
   const i=SHOWROOMS.indexOf(s);
   return `<a class="tile ${cls}" href="${shopUrl(s)}" data-r>${ph(img(s),s.name,"",s.c)}<span class="num">${String(i+1).padStart(2,"0")}</span>
-    <div class="tile-c"><small>${tr(s.tag)}</small><h3>${s.name}</h3><span class="go">${t("visit")} ${AR}</span></div></a>`;
+    <div class="tile-c"><small>${tr(s.tag)}</small><h3>${s.name}${arn(s)}</h3><span class="go">${t("visit")} ${AR}</span></div></a>`;
 }
 
 /* ================= VUES ================= */
@@ -792,7 +796,7 @@ function vHome(){
       <h1><span class="l"><span>${t("hero_t1")}</span></span><span class="l"><span><em>${t("hero_t2")}</em></span></span></h1>
       <p class="lead">${t("hero_p")}</p>
       <div class="ctas"><a class="btn btn--light" href="#/showrooms">${t("cta_sr")} ${AR}</a><a class="btn btn--ghost" href="#/catalogue">${t("cta_cat")}</a></div>
-      <ol class="hx-nav">${HERO_SR.map((id,i)=>`<li><button data-slide="${i}"><i></i><span>${String(i+1).padStart(2,"0")}</span><b>${SR[id].name}</b></button></li>`).join("")}</ol>
+      <ol class="hx-nav">${HERO_SR.map((id,i)=>`<li><button data-slide="${i}"><i></i><span>${String(i+1).padStart(2,"0")}</span><b>${SR[id].name}${arn(SR[id],"arn arn--s")}</b></button></li>`).join("")}</ol>
     </div></div></div>
     <div class="hx-scroll" aria-hidden="true"></div>
   </section>
@@ -856,7 +860,7 @@ function bHome(){
   // diaporama : révélation en balayage + carte de légende
   const hero=$("#hero"),sl=[...hero.querySelectorAll(".hx-slide")],nav=[...hero.querySelectorAll(".hx-nav button")];let cur=-1,paused=false;
   const heroCard=i=>{const s=SR[HERO_SR[i]],c=$("#hxCard");c.href=shopUrl(s);
-    c.innerHTML=`<span class="th">${ph(img(s,1),"","",s.c)}</span><span class="in"><small>${tr(s.tag)}</small><b>${s.name}</b><em>${t("visit_sr")} ${AR}</em></span>`;
+    c.innerHTML=`<span class="th">${ph(img(s,1),"","",s.c)}</span><span class="in"><small>${tr(s.tag)}</small><b>${s.name}${arn(s)}</b><em>${t("visit_sr")} ${AR}</em></span>`;
     $("#hxN").textContent=String(i+1).padStart(2,"0");};
   const go=i=>{const n=(i+sl.length)%sl.length;if(n===cur)return;
     sl.forEach(s=>s.classList.remove("prev"));if(cur>=0){sl[cur].classList.add("prev");sl[cur].classList.remove("on");}
@@ -875,7 +879,7 @@ function vShowrooms(){
   return `<section class="phero phero--plain"><div class="phero-c"><div class="wrap">${ico("store","big-ico",.7)}
     <div class="crumbs"><a href="#/">${t("home")}</a><span>/</span><span>${t("nav_showrooms")}</span></div>
     <h1 class="display">${t("srp_t")}</h1><p>${t("srp_p")}</p></div></div></section>
-    <section class="sec--s"><div class="wrap"><div class="idx">${SHOWROOMS.map((s,i)=>`<a href="${shopUrl(s)}"><span class="n">${String(i+1).padStart(2,"0")}</span><b>${s.name}</b><small>${tr(UV[s.u].l)} · ${tr(s.tag)}</small><span class="ar">${ico("arrow")}</span></a>`).join("")}</div></div></section>
+    <section class="sec--s"><div class="wrap"><div class="idx">${SHOWROOMS.map((s,i)=>`<a href="${shopUrl(s)}"><span class="n">${String(i+1).padStart(2,"0")}</span><b>${s.name}${arn(s)}</b><small>${tr(UV[s.u].l)} · ${tr(s.tag)}</small><span class="ar">${ico("arrow")}</span></a>`).join("")}</div></div></section>
     <section class="sec--s" style="padding-top:0"><div class="wrap"><div class="bento">${SHOWROOMS.map((s,i)=>tile(s,i===0?"tile--xl":i===11?"tile--w":"")).join("")}</div></div></section>`;
 }
 function bShowrooms(){}
@@ -949,7 +953,7 @@ function vContact(){
       <div data-r><span class="eyebrow" style="color:var(--navy)">${t("hq")}</span><a href="tel:+240333090553" class="h2" style="display:block;margin:14px 0 40px">+240 333 090 553</a>
         <span class="eyebrow" style="color:var(--navy)">${t("eu")}</span><a href="tel:+33644313131" class="h2" style="display:block;margin:14px 0 40px">+33 644 313 131</a>
         <a class="btn btn--ink js-wa" data-wa="pro" href="#" target="_blank" rel="noopener">${t("pro_cta")} ${AR}</a></div>
-      <div data-r><span class="eyebrow" style="color:var(--navy)">${t("write_one")}</span><div class="idx" style="margin-top:18px">${SHOWROOMS.map(s=>`<a class="js-wa" data-wa="sr" data-sr="${s.id}" href="#" target="_blank" rel="noopener" style="grid-template-columns:1fr auto;padding:18px 0"><b style="font-size:28px">${s.name}</b><span class="ar">${ico("wa")}</span></a>`).join("")}</div></div>
+      <div data-r><span class="eyebrow" style="color:var(--navy)">${t("write_one")}</span><div class="idx" style="margin-top:18px">${SHOWROOMS.map(s=>`<a class="js-wa" data-wa="sr" data-sr="${s.id}" href="#" target="_blank" rel="noopener" style="grid-template-columns:1fr auto;padding:18px 0"><b style="font-size:28px">${s.name}${arn(s)}</b><span class="ar">${ico("wa")}</span></a>`).join("")}</div></div>
     </div></section>`;
 }
 const vNF=()=>`<section class="phero phero--plain"><div class="phero-c"><div class="wrap"><h1 class="display">${t("nf")}</h1><p style="margin-top:30px"><a class="btn btn--light" href="#/">${t("home")}</a></p></div></div></section>`;
@@ -998,7 +1002,7 @@ function chrome(){
   const first=SHOWROOMS[0];
   $("#nav").innerHTML=`
     <div><a class="nl" href="#/showrooms" data-nav="showrooms">${t("nav_showrooms")}</a><div class="mega"><div class="wrap mega-in">
-      <div class="mega-cols">${UNIVERS.map(u=>`<div><h6>${tr(u.l)}</h6>${SHOWROOMS.filter(s=>s.u===u.id).map(s=>`<a href="${shopUrl(s)}" data-mp="${s.id}">${s.name}</a>`).join("")}</div>`).join("")}</div>
+      <div class="mega-cols">${UNIVERS.map(u=>`<div><h6>${tr(u.l)}</h6>${SHOWROOMS.filter(s=>s.u===u.id).map(s=>`<a href="${shopUrl(s)}" data-mp="${s.id}">${s.name}${arn(s,"arn arn--s")}</a>`).join("")}</div>`).join("")}</div>
       <div class="mega-prev" id="megaPrev">${ph(img(first),"","",first.c)}<span>${first.name}</span></div></div></div></div>
     <div><a class="nl" href="#/catalogue" data-nav="catalogue">${t("nav_cats")}</a><div class="mega"><div class="wrap mega-in" style="grid-template-columns:1fr"><div class="mega-cols mega-cats">${CATS.map(c=>`<a href="#/categorie/${c.id}">${ico(c.i,"",1.3)}${tr(c.l)}</a>`).join("")}</div></div></div></div>
     <div><a class="nl" href="#/catalogue?promo=1" data-nav="promo">${t("nav_offers")}</a></div>
@@ -1061,7 +1065,7 @@ document.addEventListener("click",e=>{
   const x=e.target;
   const ad=x.closest("[data-add]");if(ad){e.preventDefault();add(ad.dataset.add,1);return;}
 
-  const lg=x.closest("[data-lang]");if(lg){L=lg.dataset.lang;try{localStorage.setItem("vg-lang",L)}catch(_){};const go=()=>{chrome();closeDD();$("#mnav").classList.remove("on");route();};if(L==="ar"&&!window.VG_AR){const sc=document.createElement("script");sc.src="js/ar.js?v=d2541cbc";sc.onload=go;sc.onerror=go;document.head.append(sc);}else go();return;}
+  const lg=x.closest("[data-lang]");if(lg){L=lg.dataset.lang;try{localStorage.setItem("vg-lang",L)}catch(_){};const go=()=>{chrome();closeDD();$("#mnav").classList.remove("on");route();};if(L==="ar"&&!window.VG_AR){const sc=document.createElement("script");sc.src="js/ar.js?v=a8f09ec1";sc.onload=go;sc.onerror=go;document.head.append(sc);}else go();return;}
   const cu=x.closest("[data-cur]");if(cu){CUR=cu.dataset.cur;try{localStorage.setItem("vg-cur",CUR)}catch(_){};chrome();closeDD();$("#mnav").classList.remove("on");route();return;}
   const dd=x.closest("[data-dd]");if(dd){const p=dd.parentElement,was=p.classList.contains("open");closeDD();if(!was)p.classList.add("open");return;}
   if(!x.closest(".dd"))closeDD();

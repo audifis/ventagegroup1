@@ -13,6 +13,7 @@
 
   /* Pharmacie et laboratoire : pas de prix affiché */
   const NOPRICE = { "amanda-pharmacies": "Prix en pharmacie", "amanda-labs": "Tarif sur demande" }[C.id] || "Sur devis";
+  const AR_NAME = L.lang === "ar" && window.VG_AR_SR ? window.VG_AR_SR[C.id] || "" : "";
   const CARTNP = /^amanda-/.test(C.id); // on peut quand même mettre ces articles au panier (prix confirmé par WhatsApp)
   /* ——— Images ——— */
   // Chemin d'une image optimisée (la version autonome hors-ligne fournit window.__IMGMAP)
@@ -138,7 +139,7 @@
     </div></div>
     <header class="hdr"><div class="wrap hdr-in">
       <button class="hbtn burger" aria-label="Ouvrir le menu" aria-controls="drawer" aria-expanded="false">${ic("menu")}</button>
-      <a class="brand vg-brand" href="showroom.html" aria-label="${esc(C.name)}"><img src="assets/ventage-check.png" alt="" width="40" height="44"><span><b>${esc(C.name)}</b><small>Ventage Group</small></span></a>
+      <a class="brand vg-brand" href="showroom.html" aria-label="${esc(C.name)}"><img src="assets/ventage-check.png" alt="" width="40" height="44"><span><b>${esc(C.name)}</b><small${AR_NAME ? ' class="vg-arn" data-noi18n' : ""}>${AR_NAME ? esc(AR_NAME) : "Ventage Group"}</small></span></a>
       <form class="search" action="catalogue.html" role="search" autocomplete="off"><input type="hidden" name="s" value="${C.id}">
         <label class="sr" for="q-top">Rechercher</label>
         <input id="q-top" name="q" type="search" placeholder="Rechercher un produit, une marque…" aria-autocomplete="list" aria-controls="suggest">
@@ -161,7 +162,7 @@
       ${maxOff() ? `<a class="promo-pill" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>` : ""}
     </div></nav>
     <div class="drawer" id="drawer" hidden><div class="drawer-panel" role="dialog" aria-label="Menu">
-      <div class="drawer-top"><span class="vg-brand vg-brand--dark"><img src="assets/ventage-check.png" alt="" height="30"><span><b>${esc(C.name)}</b><small>Ventage Group</small></span></span><button class="hbtn drawer-close" aria-label="Fermer le menu">${ic("close")}</button></div>
+      <div class="drawer-top"><span class="vg-brand vg-brand--dark"><img src="assets/ventage-check.png" alt="" height="30"><span><b>${esc(C.name)}</b><small${AR_NAME ? ' class="vg-arn" data-noi18n' : ""}>${AR_NAME ? esc(AR_NAME) : "Ventage Group"}</small></span></span><button class="hbtn drawer-close" aria-label="Fermer le menu">${ic("close")}</button></div>
       ${D.categories.map((c) => `<details><summary>${ic(c.icon)} ${esc(c.label)}</summary><a href="catalogue.html?cat=${c.id}">Tout voir</a>${c.subs.map((s) => `<a href="catalogue.html?cat=${c.id}&sub=${s.id}">${esc(s.label)}</a>`).join("")}</details>`).join("")}
       <div class="drawer-langs" data-noi18n>${Object.entries(L.LANGS).map(([k, v]) => `<button class="js-lang${k === L.lang ? " on" : ""}" data-l="${k}" lang="${k}">${esc(v.name)}</button>`).join("")}</div>
       ${maxOff() ? `<a class="drawer-link gold" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>` : ""}
@@ -362,5 +363,5 @@
     bindSearch(); counts(); reveal();
   }
 
-  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, sidePanel, catChips, norm, NOPRICE, CARTNP };
+  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, sidePanel, catChips, norm, NOPRICE, CARTNP, AR_NAME };
 })();
