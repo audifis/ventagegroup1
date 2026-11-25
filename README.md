@@ -21,3 +21,6 @@ Chaque showroom a son propre panier (stockage `ventage:<id>`) et envoie la comma
 - Produits de la boutique d'origine : `assets/img` (WebP/AVIF, plusieurs tailles).
 - Photos des lieux (ventagegroup.com) et produits de démonstration (cdn.dummyjson.com) : redimensionnées à la volée en WebP par wsrv.nl ;
   si wsrv.nl ne répond pas, l'image d'origine est chargée. Pour la production, copier ces photos dans `assets/` optimisées.
+
+## En ligne
+https://ventage-group.vercel.app — déployé automatiquement par Vercel à chaque push sur `main` (dépôt audifis/ventagegroup1).
