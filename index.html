@@ -581,7 +581,7 @@ footer{background:var(--night);color:rgba(255,255,255,.65);padding:90px 0 34px;f
 <nav class="mnav" id="mnav"></nav>
 <div class="toast" id="toast"></div>
 
-<script src="js/catalog.js?v=d144a492"></script>
+<script src="js/catalog.js?v=0deb3151"></script>
 <script src="js/i18n-data.js?v=594a3079"></script>
 <script>
 /* ================= CONFIG ================= */
@@ -725,8 +725,9 @@ const shopUrl=(s,extra="")=>`showroom.html?s=${s.id||s}${extra}`;
 const prodUrl=p=>`produit.html?s=${p.sr}&id=${encodeURIComponent(p.id)}`;
 const OPT=(u,w)=>`https://wsrv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//,""))}&w=${w}&output=webp&q=76&we`;
 const djU=k=>{const m=/^dj:(.+):(\d+)$/.exec(k||"");return m?`https://cdn.dummyjson.com/product-images/${m[1]}/1.webp`:null;};
-const pphoto=p=>!p.pimg?null:/^vm:/.test(p.pimg)?`assets/mall/${p.pimg.slice(3)}-400.webp`:djU(p.pimg)?OPT(djU(p.pimg),480):/^https?:/.test(p.pimg)?p.pimg:`assets/img/${p.pimg}-640.webp`;
-const porig=p=>djU(p.pimg)||"";
+const usU=(k,w=480)=>/^us:/.test(k||"")?`https://images.unsplash.com/${k.slice(3)}?auto=format&fit=crop&w=${w}&h=${w}&q=70`:null;
+const pphoto=p=>!p.pimg?null:usU(p.pimg)?usU(p.pimg):/^vm:/.test(p.pimg)?`assets/mall/${p.pimg.slice(3)}-400.webp`:djU(p.pimg)?OPT(djU(p.pimg),480):/^https?:/.test(p.pimg)?p.pimg:`assets/img/${p.pimg}-640.webp`;
+const porig=p=>djU(p.pimg)||usU(p.pimg,1080)||"";
 const off=p=>p.old&&p.price?Math.round((1-p.price/p.old)*100):0;
 const srCats=id=>[...new Set(P.filter(p=>p.sr===id).map(p=>p.cat))];
 const nfmt=n=>new Intl.NumberFormat(LOC[L]).format(n);

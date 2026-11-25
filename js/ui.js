@@ -18,10 +18,14 @@
   const DJB = "https://cdn.dummyjson.com/product-images/";
   const djN = (k) => { const m = /^dj:(.+):(\d+)$/.exec(k || ""); return m ? +m[2] : 0; };
   const djUrl = (k, i = 1) => { const m = /^dj:(.+):(\d+)$/.exec(k || ""); return m ? `${DJB}${m[1]}/${i}.webp` : null; };
-  const remote = (k) => (/^(https?:|assets\/)/.test(k || "") ? k : phot(k) || djUrl(k));
-  const opt = (u, w) => !/^https?:/.test(u) ? u : `https://wsrv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//, ""))}&w=${w}&output=webp&q=76&we`;
+  /* Photos libres Unsplash (us:photo-…) : recadrage, WebP/AVIF et taille servis directement par leur CDN */
+  const UNS = "https://images.unsplash.com/";
+  const usUrl = (k) => { const m = /^us:(.+)$/.exec(k || ""); return m ? UNS + m[1] : null; };
+  const remote = (k) => (/^(https?:|assets\/)/.test(k || "") ? k : phot(k) || djUrl(k) || usUrl(k));
+  const opt = (u, w) => !/^https?:/.test(u) ? u : u.startsWith(UNS) ? `${u}?auto=format&fit=crop&w=${w}${w <= 800 ? `&h=${w}` : ""}&q=70`
+    : `https://wsrv.nl/?url=${encodeURIComponent(u.replace(/^https?:\/\//, ""))}&w=${w}&output=webp&q=76&we`;
   const rimg = (u, alt, cls = "", eager = false, widths = [400, 800], sizes = "(max-width:600px) 46vw, 300px") =>
-    `<img class="${cls} is-photo" src="${opt(u, widths[0])}" srcset="${widths.map((w) => `${opt(u, w)} ${w}w`).join(", ")}" sizes="${sizes}" data-orig="${u}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
+    `<img class="${cls} is-photo" src="${opt(u, widths[0])}" srcset="${widths.map((w) => `${opt(u, w)} ${w}w`).join(", ")}" sizes="${sizes}" data-orig="${u.startsWith(UNS) ? opt(u, 1080) : u}" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">`;
   document.addEventListener("error", (e) => { const i = e.target; if (i.tagName !== "IMG") return; if (i.dataset.orig && i.getAttribute("src") !== i.dataset.orig) { i.removeAttribute("srcset"); i.src = i.dataset.orig; } else i.style.visibility = "hidden"; }, true);
   const src = (k, s) => remote(k) || (window.__IMGMAP ? (__IMGMAP[`${k}-${s}`] || __IMGMAP[`${k}-${{ 640: 320, 1920: 960 }[s] || s}`] || "") : `assets/img/${k}-${s}.webp`);
   const vm = (k) => (/^vm:(.+)$/.exec(k || "") || [])[1];

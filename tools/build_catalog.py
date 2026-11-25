@@ -60,16 +60,16 @@ C("accessoires", T("Sacs & bijoux", "Bolsos y joyas", "Bags & jewellery"), "bagl
   T("Sacs, bijoux et maroquinerie.", "Bolsos, joyas y marroquinería.", "Bags, jewellery and leather goods."))
 # SUPERMERCADO
 C("frais", T("Fruits, légumes & frais", "Frutas, verduras y frescos", "Fresh food"), "apple",
-  [("fruits-legumes", T("Fruits & légumes", "Frutas y verduras", "Fruit & vegetables")), ("boucherie", T("Viandes & poissons", "Carnes y pescados", "Meat & fish")), ("cremerie", T("Crèmerie & œufs", "Lácteos y huevos", "Dairy & eggs"))], T("Frais", "Frescos", "Fresh"),
+  [("fruits-legumes", T("Fruits & légumes", "Frutas y verduras", "Fruit & vegetables")), ("boucherie", T("Viandes & poissons", "Carnes y pescados", "Meat & fish")), ("cremerie", T("Crèmerie & œufs", "Lácteos y huevos", "Dairy & eggs")), ("boulangerie", T("Boulangerie", "Panadería", "Bakery")), ("surgeles", T("Surgelés & glaces", "Congelados y helados", "Frozen & ice cream"))], T("Frais", "Frescos", "Fresh"),
   T("Fruits, légumes, viandes et produits laitiers.", "Frutas, verduras, carnes y lácteos.", "Fruit, vegetables, meat and dairy."))
 C("epicerie", T("Épicerie", "Alimentación", "Pantry"), "basket",
-  [("base", T("Riz, pâtes & farines", "Arroz, pasta y harinas", "Rice, pasta & flour")), ("conserves", T("Conserves & sauces", "Conservas y salsas", "Tins & sauces")), ("petit-dej", T("Petit-déjeuner", "Desayuno", "Breakfast"))], None,
+  [("base", T("Riz, pâtes & farines", "Arroz, pasta y harinas", "Rice, pasta & flour")), ("conserves", T("Conserves & sauces", "Conservas y salsas", "Tins & sauces")), ("petit-dej", T("Petit-déjeuner", "Desayuno", "Breakfast")), ("huiles-epices", T("Huiles & épices", "Aceites y especias", "Oils & spices")), ("biscuits", T("Biscuits, snacks & confiserie", "Galletas, snacks y dulces", "Biscuits, snacks & sweets"))], None,
   T("L'essentiel du quotidien, au meilleur prix.", "Lo esencial del día a día, al mejor precio.", "Everyday essentials at the best price."))
 C("boissons", T("Boissons", "Bebidas", "Drinks"), "bottle",
-  [("eaux-jus", T("Eaux & jus", "Aguas y zumos", "Water & juice")), ("sodas", T("Sodas", "Refrescos", "Soft drinks")), ("cafe-the", T("Café & thé", "Café y té", "Coffee & tea"))], None,
+  [("eaux-jus", T("Eaux & jus", "Aguas y zumos", "Water & juice")), ("sodas", T("Sodas", "Refrescos", "Soft drinks")), ("cafe-the", T("Café & thé", "Café y té", "Coffee & tea")), ("alcools", T("Bières, vins & spiritueux", "Cervezas, vinos y licores", "Beer, wine & spirits"))], None,
   T("Eaux, jus, sodas, café et thé.", "Aguas, zumos, refrescos, café y té.", "Water, juice, soft drinks, coffee and tea."))
 C("entretien", T("Entretien & hygiène", "Limpieza e higiene", "Household & hygiene"), "spray",
-  [("menage", T("Lessive & ménage", "Detergentes y limpieza", "Laundry & cleaning")), ("hygiene", T("Hygiène", "Higiene", "Hygiene"))], T("Entretien", "Limpieza", "Household"),
+  [("menage", T("Lessive & ménage", "Detergentes y limpieza", "Laundry & cleaning")), ("hygiene", T("Hygiène", "Higiene", "Hygiene")), ("papier", T("Papier & essuie-tout", "Papel y rollos de cocina", "Paper & kitchen roll"))], T("Entretien", "Limpieza", "Household"),
   T("Lessive, ménage et hygiène pour toute la famille.", "Detergentes, limpieza e higiene para toda la familia.", "Laundry, cleaning and hygiene for the whole family."))
 C("bebe-animaux", T("Bébé & animaux", "Bebé y mascotas", "Baby & pets"), "baby",
   [("bebe", T("Bébé", "Bebé", "Baby")), ("animaux", T("Animalerie", "Mascotas", "Pet food"))], T("Bébé & animaux", "Bebé y mascotas", "Baby & pets"),
@@ -730,6 +730,16 @@ G(S, "frais", "fruits-legumes", "apple", ["Ventage Family"], T("{v}", "{v}", "{v
 G(S, "frais", "boucherie", "fish", ["Ventage Family"], T("{v}", "{v}", "{v}"), [("Crevettes · le kg", "Gambas · el kg", "Prawns · per kg", 9500), ("Bar entier · le kg", "Lubina entera · el kg", "Whole sea bass · per kg", 6500), ("Côtelettes d'agneau · le kg", "Chuletas de cordero · el kg", "Lamb chops · per kg", 9500), ("Saucisses · 500 g", "Salchichas · 500 g", "Sausages · 500 g", 3500)], HL["frais"])
 G(S, "frais", "cremerie", "cup", ["Président", "Danone", "Ventage Family"], T("{v}", "{v}", "{v}"), [("Yaourts nature · 8", "Yogures naturales · 8", "Plain yoghurts · 8", 3200), ("Beurre doux 250 g", "Mantequilla 250 g", "Butter 250 g", 2500), ("Fromage râpé 200 g", "Queso rallado 200 g", "Grated cheese 200 g", 2900), ("Camembert 250 g", "Camembert 250 g", "Camembert 250 g", 3500)], HL["frais"])
 
+# ───────────── 3 bis) Ventage Supermercado : ~200 articles photographiés (tools/super_products.py) ─────────────
+from super_products import rows as super_rows
+for name, brand, cat, sub, price, old, photo, icon in super_rows():
+    fr, es, en = name.split("|")
+    pid = "us-" + hashlib.md5(fr.encode()).hexdigest()[:10]
+    o2, fl = flags_for(pid, price)
+    hl = list(HL.get(cat, []))
+    if "le kg" in fr: hl = [T("Arrivage frais", "Llegada fresca", "Fresh delivery"), T("Prix au poids", "Precio al peso", "Priced by weight")]
+    add(pid, "supermercado", brand, T(fr, es, en), cat, sub, photo, price, old or o2, fl, hl, {}, icon)
+
 S = "ventage-casa"
 G(S, "maison", "deco", "lamp", ["Ventage Home"], T("{v}", "{v}", "{v}"), [("Miroir rond doré 80 cm", "Espejo redondo dorado 80 cm", "80 cm round gold mirror", 65000), ("Vase céramique", "Jarrón de cerámica", "Ceramic vase", 19500), ("Coussins velours · lot de 2", "Cojines de terciopelo · pack de 2", "Velvet cushions · set of 2", 19500), ("Tableau toile 90×60", "Cuadro en lienzo 90×60", "90×60 canvas print", 35000), ("Bougies parfumées · coffret", "Velas perfumadas · estuche", "Scented candles · gift set", 15000), ("Étagère murale bois", "Estante de pared de madera", "Wooden wall shelf", 25000)], [])
 G(S, "pro", "sieges", "sofa", ["Ventage Pro"], T("{v}", "{v}", "{v}"), [("Fauteuil de bureau ergonomique", "Silla de oficina ergonómica", "Ergonomic office chair", 125000), ("Chaise visiteur · lot de 4", "Silla de confidente · pack de 4", "Visitor chairs · set of 4", 145000), ("Banquette d'accueil 3 places", "Bancada de espera 3 plazas", "Three-seat reception bench", 165000)], [])
@@ -740,6 +750,7 @@ seen, OUT = set(), []
 for p in PRODUCTS:
     k = (p[1], p[3].split("|")[0])
     if k in seen: continue
+    if p[1] == "supermercado" and not p[6]: continue  # supermarché : uniquement des articles photographiés
     seen.add(k); p[7] = p[7] or None; OUT.append(p)
 
 count = {}

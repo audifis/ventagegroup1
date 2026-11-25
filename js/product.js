@@ -13,7 +13,7 @@
 
   // Galerie : photo produit + photos d'ambiance du même univers
   const n = U.djN(p.img);
-  const views = n > 1 ? Array.from({ length: n }, (_, i) => ({ u: U.djUrl(p.img, i + 1) })) : [p.img ? { k: p.img } : { svg: p.svg }, { scene: c.scene }];
+  const views = n > 1 ? Array.from({ length: n }, (_, i) => ({ u: U.djUrl(p.img, i + 1) })) : [/^us:/.test(p.img || "") ? { u: U.remote(p.img) } : p.img ? { k: p.img } : { svg: p.svg }, { scene: c.scene }];
   const view = (v, cls = "") => v.u ? U.rimg(v.u, p.name, cls, true, [640, 1200], "(max-width:900px) 100vw, 50vw") : v.k ? U.pimg(v.k, p.name, cls, true) : v.svg ? U.studio(v.svg) : U.scene(v.scene, "", false, "(max-width:900px) 100vw, 50vw");
   const msg = (q) => t("Bonjour SODISCOM-GE, je suis intéressé(e) par : {p} (réf. {ref}){q}. Pouvez-vous me confirmer la disponibilité et la livraison ?", { p: `${p.brand} ${p.name}`, ref: p.ref, q: q > 1 ? t(", quantité {n}", { n: q }) : "" });
 
