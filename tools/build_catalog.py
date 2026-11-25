@@ -71,9 +71,12 @@ C("boissons", T("Boissons", "Bebidas", "Drinks"), "bottle",
 C("entretien", T("Entretien & hygiène", "Limpieza e higiene", "Household & hygiene"), "spray",
   [("menage", T("Lessive & ménage", "Detergentes y limpieza", "Laundry & cleaning")), ("hygiene", T("Hygiène", "Higiene", "Hygiene")), ("papier", T("Papier & essuie-tout", "Papel y rollos de cocina", "Paper & kitchen roll"))], T("Entretien", "Limpieza", "Household"),
   T("Lessive, ménage et hygiène pour toute la famille.", "Detergentes, limpieza e higiene para toda la familia.", "Laundry, cleaning and hygiene for the whole family."))
-C("bebe-animaux", T("Bébé & animaux", "Bebé y mascotas", "Baby & pets"), "baby",
-  [("bebe", T("Bébé", "Bebé", "Baby")), ("animaux", T("Animalerie", "Mascotas", "Pet food"))], T("Bébé & animaux", "Bebé y mascotas", "Baby & pets"),
-  T("Couches, laits, petits pots et nourriture pour animaux.", "Pañales, leches, potitos y comida para mascotas.", "Nappies, milk, baby food and pet food."))
+C("bebe", T("Bébé", "Bebé", "Baby"), "baby",
+  [("bebe-soins", T("Couches & soins", "Pañales y cuidados", "Nappies & care")), ("bebe-repas", T("Repas & biberons", "Comidas y biberones", "Feeding & bottles"))], None,
+  T("Couches, soins, biberons et petits pots.", "Pañales, cuidados, biberones y potitos.", "Nappies, care, bottles and baby food."))
+C("animalerie", T("Animalerie", "Mascotas", "Pet shop"), "paw",
+  [("chiens", T("Chiens", "Perros", "Dogs")), ("chats", T("Chats", "Gatos", "Cats"))], None,
+  T("Croquettes, pâtées, friandises et jouets pour chiens et chats.", "Pienso, comida húmeda, premios y juguetes para perros y gatos.", "Dry and wet food, treats and toys for dogs and cats."))
 # KM5
 C("electro", "Électroménager", "fridge", [("froid", "Réfrigérateurs & congélateurs"), ("lavage", "Lave-linge"), ("clim", "Climatisation & ventilation")], None,
   T("Froid, lavage et climatisation Inverter.", "Frío, lavado y climatización Inverter.", "Cooling, laundry and Inverter air conditioning."))
@@ -159,6 +162,9 @@ C("deco-murale", T("Décoration murale", "Decoración mural", "Wall décor"), "w
   [("papiers-peints", T("Papiers peints", "Papeles pintados", "Wallpaper")), ("effets", T("Peintures à effet", "Pinturas de efecto", "Effect paints"))], T("Déco murale", "Deco mural", "Wall décor"),
   T("Papiers peints et peintures décoratives.", "Papeles pintados y pinturas decorativas.", "Wallpaper and decorative paints."))
 # PHARMACIES
+C("conseil", T("Médicaments conseil", "Medicamentos sin receta", "Over-the-counter medicines"), "pill",
+  [("douleur", T("Douleurs & fièvre", "Dolor y fiebre", "Pain & fever")), ("rhume", T("Rhume, toux & gorge", "Resfriado, tos y garganta", "Colds, cough & throat")), ("digestion", T("Digestion & transit", "Digestión y tránsito", "Digestion"))], T("Conseil", "Sin receta", "OTC"),
+  T("Douleurs, fièvre, rhume et digestion : le conseil du pharmacien.", "Dolor, fiebre, resfriado y digestión: el consejo del farmacéutico.", "Pain, fever, colds and digestion: your pharmacist's advice."))
 C("dermo", T("Dermo-cosmétique", "Dermocosmética", "Skincare"), "pill",
   [("visage", T("Visage", "Rostro", "Face")), ("corps", T("Corps & mains", "Cuerpo y manos", "Body & hands")), ("solaires", T("Solaires", "Solares", "Sun care"))], T("Soins", "Cuidados", "Skincare"),
   T("Soins visage, corps et protection solaire.", "Cuidado facial, corporal y protección solar.", "Face, body and sun care."))
@@ -166,7 +172,7 @@ C("hygiene-sante", T("Hygiène", "Higiene", "Hygiene"), "tooth",
   [("dentaire", T("Hygiène bucco-dentaire", "Higiene bucodental", "Oral care")), ("intime", T("Hygiène du corps", "Higiene corporal", "Body hygiene"))], None,
   T("Dentaire, déodorants et hygiène du corps.", "Dental, desodorantes e higiene corporal.", "Oral care, deodorants and body hygiene."))
 C("complements", T("Vitamines & compléments", "Vitaminas y complementos", "Vitamins & supplements"), "capsule",
-  [("vitamines", T("Vitamines & minéraux", "Vitaminas y minerales", "Vitamins & minerals")), ("forme", T("Forme & immunité", "Energía e inmunidad", "Energy & immunity"))], T("Compléments", "Complementos", "Supplements"),
+  [("vitamines", T("Vitamines & minéraux", "Vitaminas y minerales", "Vitamins & minerals")), ("forme", T("Forme & immunité", "Energía e inmunidad", "Energy & immunity")), ("phyto", T("Phyto & aromathérapie", "Fitoterapia y aromaterapia", "Herbal & aromatherapy"))], T("Compléments", "Complementos", "Supplements"),
   T("Vitamines, minéraux et compléments alimentaires.", "Vitaminas, minerales y complementos.", "Vitamins, minerals and supplements."))
 C("maman-bebe", T("Maman & bébé", "Mamá y bebé", "Mother & baby"), "baby",
   [("laits", T("Laits & alimentation", "Leches y alimentación", "Milk & food")), ("soins-bebe", T("Soins & couches", "Cuidados y pañales", "Care & nappies"))], T("Bébé", "Bebé", "Baby"),
@@ -205,6 +211,10 @@ CAT_IDS = {c["id"]: c for c in CATS}
 
 PRODUCTS = []
 def add(pid, sr, brand, name, cat, sub, img, price, old, flags, hl, specs, svg):
+    if cat == "bebe-animaux":
+        low = name.lower()
+        if sub == "animaux": cat, sub = "animalerie", ("chats" if re.search(r"\bchat|cat |cat\b|gato", low) else "chiens")
+        else: cat, sub = "bebe", ("bebe-repas" if re.search(r"biberon|lait|petits pots|céréales|potito", low) else "bebe-soins")
     assert cat in CAT_IDS, (pid, cat)
     assert sub in [s[0] for s in CAT_IDS[cat]["subs"]], (pid, cat, sub)
     PRODUCTS.append([pid, sr, brand, name, cat, sub, img, price, old, flags, hl, specs, svg])
@@ -423,7 +433,7 @@ HL = {
  "accessoires": [T("Finitions soignées", "Acabados cuidados", "Fine finishing"), T("Emballage cadeau offert", "Envoltorio de regalo gratis", "Free gift wrapping")],
  "frais": [T("Arrivage frais", "Llegada fresca", "Fresh delivery"), T("Prix au poids", "Precio al peso", "Priced by weight")],
  "epicerie": [T("Qualité contrôlée", "Calidad controlada", "Quality checked")], "boissons": [T("Servir frais", "Servir frío", "Serve chilled")],
- "entretien": [T("Format familial", "Formato familiar", "Family size")], "bebe-animaux": [T("Formule complète", "Fórmula completa", "Complete formula")],
+ "entretien": [T("Format familial", "Formato familiar", "Family size")], "bebe-animaux": [T("Formule complète", "Fórmula completa", "Complete formula")], "bebe": [T("Formule complète", "Fórmula completa", "Complete formula")], "animalerie": [T("Formule complète", "Fórmula completa", "Complete formula")],
  "maison": [T("Livraison et montage", "Entrega y montaje", "Delivery and assembly"), T("Finitions au choix", "Acabados a elegir", "Choice of finishes")],
  "table": [T("Passe au lave-vaisselle", "Apto para lavavajillas", "Dishwasher safe"), T("Qualité professionnelle", "Calidad profesional", "Professional quality")],
  "cuisine": [T("Garantie 1 an", "Garantía 1 año", "1-year warranty")], "info": [T("Garantie constructeur", "Garantía del fabricante", "Manufacturer warranty"), T("Configuration offerte", "Configuración incluida", "Free set-up")],
@@ -740,17 +750,31 @@ for name, brand, cat, sub, price, old, photo, icon in super_rows():
     if "le kg" in fr: hl = [T("Arrivage frais", "Llegada fresca", "Fresh delivery"), T("Prix au poids", "Precio al peso", "Priced by weight")]
     add(pid, "supermercado", brand, T(fr, es, en), cat, sub, photo, price, old or o2, fl, hl, {}, icon)
 
+# ───────────── 3 ter) Amanda Pharmacies & Labs : catalogue élargi, sans prix (tools/amanda_products.py) ─────────────
+import amanda_products as AM
+HL_AM = {"amanda-pharmacies": [T("Conseil du pharmacien", "Consejo del farmacéutico", "Pharmacist's advice"), T("Disponible en officine", "Disponible en farmacia", "Available in store")],
+         "amanda-labs": [T("Prélèvement sur place ou à domicile", "Extracción en el centro o a domicilio", "Sample taken on site or at home"), T("Résultats en ligne sécurisés", "Resultados en línea seguros", "Secure online results")]}
+for name, brand, cat, sub in AM.rows():
+    sr = "amanda-labs" if brand == "Amanda Labs" else "amanda-pharmacies"
+    fr = name.split("|")[0]
+    pid = "am-" + hashlib.md5((sr + fr).encode()).hexdigest()[:10]
+    add(pid, sr, brand, name, cat, sub, None, None, None, flags_for(pid, 1)[1], HL_AM[sr], {}, {"conseil": "pill", "complements": "capsule", "dermo": "pill", "hygiene-sante": "tooth", "maman-bebe": "baby", "materiel-medical": "heart"}.get(cat, "flask"))
+
 S = "ventage-casa"
 G(S, "maison", "deco", "lamp", ["Ventage Home"], T("{v}", "{v}", "{v}"), [("Miroir rond doré 80 cm", "Espejo redondo dorado 80 cm", "80 cm round gold mirror", 65000), ("Vase céramique", "Jarrón de cerámica", "Ceramic vase", 19500), ("Coussins velours · lot de 2", "Cojines de terciopelo · pack de 2", "Velvet cushions · set of 2", 19500), ("Tableau toile 90×60", "Cuadro en lienzo 90×60", "90×60 canvas print", 35000), ("Bougies parfumées · coffret", "Velas perfumadas · estuche", "Scented candles · gift set", 15000), ("Étagère murale bois", "Estante de pared de madera", "Wooden wall shelf", 25000)], [])
 G(S, "pro", "sieges", "sofa", ["Ventage Pro"], T("{v}", "{v}", "{v}"), [("Fauteuil de bureau ergonomique", "Silla de oficina ergonómica", "Ergonomic office chair", 125000), ("Chaise visiteur · lot de 4", "Silla de confidente · pack de 4", "Visitor chairs · set of 4", 145000), ("Banquette d'accueil 3 places", "Bancada de espera 3 plazas", "Three-seat reception bench", 165000)], [])
 G(S, "pro", "bureaux", "table", ["Ventage Pro"], T("{v}", "{v}", "{v}"), [("Bureau de direction 180 cm", "Mesa de dirección 180 cm", "180 cm executive desk", 345000), ("Bureau opératif 140 cm", "Mesa operativa 140 cm", "140 cm office desk", 125000), ("Armoire de rangement haute", "Armario alto de oficina", "Tall storage cabinet", 165000)], [])
 
 # Doublons de nom dans un même showroom → on garde le premier
-seen, OUT = set(), []
+seen, OUT, AMI = set(), [], {}
 for p in PRODUCTS:
     k = (p[1], p[3].split("|")[0])
     if k in seen: continue
     if p[1] == "supermercado" and not p[6]: continue  # supermarché : uniquement des articles photographiés
+    if p[1] in ("amanda-pharmacies", "amanda-labs"):  # pharmacie et laboratoire : pas de prix affiché
+        p[7] = p[8] = None
+        if not p[6]:
+            n = AMI.get(p[5], 0); AMI[p[5]] = n + 1; p[6] = AM.photo_for(p[5], n)
     seen.add(k); p[7] = p[7] or None; OUT.append(p)
 
 count = {}

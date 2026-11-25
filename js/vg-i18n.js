@@ -1,6 +1,9 @@
 /* Traductions des textes propres à Ventage (s'ajoutent au dictionnaire de la boutique). */
 window.VG_UI = {
 "es": {
+"Prendre rendez-vous": "Pedir cita",
+"Prix en pharmacie": "Precio en farmacia",
+"Tarif sur demande": "Tarifa a consultar",
 "Rayons & filtres": "Secciones y filtros",
 "Rechercher un article…": "Buscar un artículo…",
 "Demander à un conseiller": "Preguntar a un asesor",
@@ -61,6 +64,9 @@ window.VG_UI = {
 "Ventage Group · 12 showrooms": "Ventage Group · 12 showrooms"
 },
 "en": {
+"Prendre rendez-vous": "Book an appointment",
+"Prix en pharmacie": "Price in store",
+"Tarif sur demande": "Price on request",
 "Rayons & filtres": "Departments & filters",
 "Rechercher un article…": "Search products…",
 "Demander à un conseiller": "Ask an advisor",

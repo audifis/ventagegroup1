@@ -33,9 +33,9 @@
           ${U.priceBlock(p, true)}
           <ul class="hl" style="margin-top:18px">${p.highlights.map((h) => `<li>${U.esc(h)}</li>`).join("")}</ul>
           <div class="buy">
-            ${p.price != null ? `<div class="qty"><button type="button" data-d="-1" aria-label="Moins">−</button><input id="qty" type="number" min="1" max="99" value="1" aria-label="Quantité"><button type="button" data-d="1" aria-label="Plus">+</button></div>
+            ${p.price != null || U.CARTNP ? `<div class="qty"><button type="button" data-d="-1" aria-label="Moins">−</button><input id="qty" type="number" min="1" max="99" value="1" aria-label="Quantité"><button type="button" data-d="1" aria-label="Plus">+</button></div>
             <button class="btn btn--lg" id="add">${U.ic("bag")} Ajouter au panier</button>` : ""}
-            <a class="btn btn--wa btn--lg" id="ask" href="${U.wa(msg(1))}" target="_blank" rel="noopener">${U.waIcon} ${p.price == null ? "Demander un devis" : "Commander sur WhatsApp"}</a>
+            <a class="btn btn--wa btn--lg" id="ask" href="${U.wa(msg(1))}" target="_blank" rel="noopener">${U.waIcon} ${C.id === "amanda-labs" ? "Prendre rendez-vous" : p.price == null && !U.CARTNP ? "Demander un devis" : "Commander sur WhatsApp"}</a>
           </div>
           <div class="ptools"><button class="js-fav" data-id="${p.id}" aria-pressed="false">${U.ic("heart")} Favori</button><button class="js-cmp" data-id="${p.id}" aria-pressed="false">${U.ic("compare")} Comparer</button></div>
         </div>

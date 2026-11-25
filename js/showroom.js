@@ -27,7 +27,7 @@
       <div class="slide-copy wrap"><span class="kicker">${esc(s.k)}</span>
         <${i ? "h2" : "h1"} class="hero-t"><span class="ln">${esc(s.l1)}</span><span class="ln"><em>${esc(s.l2)}</em></span></${i ? "h2" : "h1"}>
         <p>${esc(s.p)}</p><div class="ctas">${s.ctas}</div></div>
-      ${s.deal ? `<a class="deal" href="${U.productUrl(s.deal)}"><span class="deal-img">${U.media(s.deal)}</span><span class="deal-txt"><small>${s.deal.oldPrice ? tr("Offre du moment") : tr("Top vente")}</small><b>${esc(s.deal.name)}</b><em>${s.deal.price ? U.fmt(s.deal.price) : tr("Sur devis")}${s.deal.oldPrice ? ` <s>${U.fmt(s.deal.oldPrice)}</s>` : ""}</em></span></a>` : ""}
+      ${s.deal ? `<a class="deal" href="${U.productUrl(s.deal)}"><span class="deal-img">${U.media(s.deal)}</span><span class="deal-txt"><small>${s.deal.oldPrice ? tr("Offre du moment") : tr("Top vente")}</small><b>${esc(s.deal.name)}</b><em>${s.deal.price ? U.fmt(s.deal.price) : tr(U.NOPRICE)}${s.deal.oldPrice ? ` <s>${U.fmt(s.deal.oldPrice)}</s>` : ""}</em></span></a>` : ""}
     </div>`).join("");
   $("#dots").innerHTML = slides.map((s, i) => `<button role="tab" aria-label="${esc(s.k)}" class="${i ? "" : "on"}" aria-selected="${!i}"><i></i></button>`).join("");
 

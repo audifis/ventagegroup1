@@ -11,6 +11,9 @@
   const fmt = (v) => new Intl.NumberFormat(L.meta.loc).format(v).replace(/ /g, " ") + " FCFA";
   const productUrl = (p) => `produit.html?id=${encodeURIComponent(p.id)}`;
 
+  /* Pharmacie et laboratoire : pas de prix affiché */
+  const NOPRICE = { "amanda-pharmacies": "Prix en pharmacie", "amanda-labs": "Tarif sur demande" }[C.id] || "Sur devis";
+  const CARTNP = /^amanda-/.test(C.id); // on peut quand même mettre ces articles au panier (prix confirmé par WhatsApp)
   /* ——— Images ——— */
   // Chemin d'une image optimisée (la version autonome hors-ligne fournit window.__IMGMAP)
   const phot = (k) => { const m = /^ph:([\w-]+):(\d+)$/.exec(k || ""); if (!m) return null; const s = V.SHOWROOMS.find((x) => x.id === m[1]); return s ? s.photos[+m[2] % s.photos.length] : null; };
@@ -78,7 +81,7 @@
   const media = (p, cls = "", eager = false) => p.img ? pimg(p.img, p.name, cls, eager) : studio(p.svg);
 
   /* Pictos de ligne */
-  const P = { star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>', spark: '<path d="M12 3v5M12 16v5M3 12h5M16 12h5M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5"/>',
+  const P = { paw: '<circle cx="5" cy="10" r="1.8"/><circle cx="9" cy="5.5" r="1.8"/><circle cx="15" cy="5.5" r="1.8"/><circle cx="19" cy="10" r="1.8"/><path d="M12 11.5c-3 0-6 4-6 6.5 0 1.6 1.4 2.5 3 2l3-1 3 1c1.6.5 3-.4 3-2 0-2.5-3-6.5-6-6.5z"/>', star: '<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>', spark: '<path d="M12 3v5M12 16v5M3 12h5M16 12h5M6.3 6.3l2.5 2.5M15.2 15.2l2.5 2.5M6.3 17.7l2.5-2.5M15.2 8.8l2.5-2.5"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/>', heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',
     bag: '<path d="M5 8h14l-1 12H6z"/><path d="M9 8a3 3 0 016 0"/>', menu: '<path d="M4 7h16M4 12h16M4 17h16"/>', close: '<path d="M6 6l12 12M18 6L6 18"/>',
     compare: '<path d="M8 4v16M16 4v16M4 8h8M12 16h8"/>', arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>', left: '<path d="M15 6l-6 6 6 6"/>', right: '<path d="M9 6l6 6-6 6"/>',
@@ -97,7 +100,7 @@
 
   /* ——— Prix ——— */
   function priceBlock(p, big = false) {
-    if (p.price == null) return `<div class="pr${big ? " pr--big" : ""}"><b>Sur devis</b></div>`;
+    if (p.price == null) return `<div class="pr${big ? " pr--big" : ""}"><b>${esc(tr(NOPRICE))}</b></div>`;
     const d = D.discount(p);
     return `<div class="pr${big ? " pr--big" : ""}"><b>${fmt(p.price)}</b>${p.oldPrice ? `<s>${fmt(p.oldPrice)}</s>` : ""}${big && d ? `<span class="save">${esc(t("Vous économisez {x}", { x: fmt(p.oldPrice - p.price) }))}</span>` : ""}</div>`;
   }
@@ -115,7 +118,7 @@
         ${priceBlock(p)}
       </div>
       <div class="pc-actions">
-        ${p.price == null ? `<a class="btn btn--sm btn--line" href="${productUrl(p)}">Demander un devis</a>` : `<button class="btn btn--sm js-add" data-id="${p.id}">${ic("bag")} Ajouter</button>`}
+        ${p.price == null && !CARTNP ? `<a class="btn btn--sm btn--line" href="${productUrl(p)}">Demander un devis</a>` : `<button class="btn btn--sm js-add" data-id="${p.id}">${ic("bag")} Ajouter</button>`}
         <button class="pc-cmp js-cmp${Store.inCompare(p.id) ? " on" : ""}" data-id="${p.id}" aria-pressed="${Store.inCompare(p.id)}" aria-label="${esc(t("Comparer {name}", { name: p.name }))}" title="Comparer">${ic("compare")}</button>
       </div></article>`;
   }
@@ -153,15 +156,15 @@
     <nav class="catnav" aria-label="Catégories"><div class="wrap catnav-in">
       <div class="allcats"><button class="allcats-btn" aria-expanded="false" aria-controls="mega">${ic("menu")} Toutes les catégories</button>
         <div class="mega" id="mega"><div class="mega-grid">${mega}</div>
-          <a class="mega-promo" href="catalogue.html?promo=1">${scene(S.photos[1])}<span><small>Offres du moment</small><b>${maxOff() ? esc(t("Jusqu'à -{n} %", { n: maxOff() })) : esc(C.name)}</b><em>Voir les promotions →</em></span></a></div></div>
+          <a class="mega-promo" href="${maxOff() ? "catalogue.html?promo=1" : "catalogue.html"}">${scene(S.photos[1])}<span><small>${maxOff() ? "Offres du moment" : esc(C.name)}</small><b>${maxOff() ? esc(t("Jusqu'à -{n} %", { n: maxOff() })) : esc(tr("Tout le catalogue"))}</b><em>${maxOff() ? "Voir les promotions →" : esc(tr("Explorer la boutique")) + " →"}</em></span></a></div></div>
       <ul class="catlinks">${D.categories.map((c) => `<li><a class="${active === c.id ? "on" : ""}" href="catalogue.html?cat=${c.id}">${ic(c.icon)} ${esc(c.short || c.label)}</a></li>`).join("")}</ul>
-      <a class="promo-pill" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>
+      ${maxOff() ? `<a class="promo-pill" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>` : ""}
     </div></nav>
     <div class="drawer" id="drawer" hidden><div class="drawer-panel" role="dialog" aria-label="Menu">
       <div class="drawer-top"><span class="vg-brand vg-brand--dark"><img src="assets/ventage-check.png" alt="" height="30"><span><b>${esc(C.name)}</b><small>Ventage Group</small></span></span><button class="hbtn drawer-close" aria-label="Fermer le menu">${ic("close")}</button></div>
       ${D.categories.map((c) => `<details><summary>${ic(c.icon)} ${esc(c.label)}</summary><a href="catalogue.html?cat=${c.id}">Tout voir</a>${c.subs.map((s) => `<a href="catalogue.html?cat=${c.id}&sub=${s.id}">${esc(s.label)}</a>`).join("")}</details>`).join("")}
       <div class="drawer-langs" data-noi18n>${Object.entries(L.LANGS).map(([k, v]) => `<button class="js-lang${k === L.lang ? " on" : ""}" data-l="${k}" lang="${k}">${esc(v.name)}</button>`).join("")}</div>
-      <a class="drawer-link gold" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>
+      ${maxOff() ? `<a class="drawer-link gold" href="catalogue.html?promo=1">${ic("tag")} Promotions</a>` : ""}
       ${C.pro ? `<a class="drawer-link" href="contact.html#pro">${ic("building")} Espace Pro</a>` : ""}
       <a class="drawer-link" data-portal href="index.html">${ic("left")} Ventage Group · 12 showrooms</a>
       <a class="drawer-link" href="contact.html">${ic("pin")} Showroom & contact</a>
@@ -182,7 +185,7 @@
           <p><b style="color:#fff;display:block;margin-bottom:4px">${esc(C.name)}</b>${esc(tr(S.desc.split("|")[0]))}</p>
           <a class="btn btn--wa btn--sm" href="${wa("Bonjour SODISCOM-GE !")}" target="_blank" rel="noopener">${waIcon} WhatsApp</a></div>
         <div><b>Rayons</b>${D.categories.map((c) => `<a href="catalogue.html?cat=${c.id}">${esc(c.label)}</a>`).join("")}</div>
-        <div><b>Acheter</b><a href="catalogue.html?promo=1">Promotions</a><a href="catalogue.html?sort=new">Nouveautés</a><a href="catalogue.html?fav=1">Mes favoris</a><a href="panier.html">Mon panier</a><a href="contact.html#faq">Comment commander</a></div>
+        <div><b>Acheter</b>${maxOff() ? '<a href="catalogue.html?promo=1">Promotions</a>' : ""}<a href="catalogue.html?sort=new">Nouveautés</a><a href="catalogue.html?fav=1">Mes favoris</a><a href="panier.html">Mon panier</a><a href="contact.html#faq">Comment commander</a></div>
         <div><b>Showroom</b><address>${esc(C.address)}<br>${esc(C.country)}</address><a href="tel:${C.phone.replace(/\s/g, "")}">${esc(C.phone)}</a>${C.email ? `<a href="mailto:${C.email}">${esc(C.email)}</a>` : ""}${C.pro ? '<a href="contact.html#pro">Espace professionnels</a>' : ""}<a data-portal href="index.html">Tous les showrooms Ventage</a></div>
       </div>
       <div class="ftr-bottom"><span>© ${new Date().getFullYear()} ${esc(C.name)}</span>
@@ -218,7 +221,7 @@
       const cats = q ? D.categories.flatMap((c) => c.subs.map((s) => ({ c, s }))).filter(({ s, c }) => norm(s.label + " " + c.label).includes(norm(q))).slice(0, 3) : [];
       if (!q) { box.hidden = true; return; }
       box.innerHTML = (cats.length ? `<div class="sg-cats">${cats.map(({ c, s }) => `<a href="catalogue.html?cat=${c.id}&sub=${s.id}">${ic("grid")} ${esc(s.label)}</a>`).join("")}</div>` : "") +
-        (res.length ? res.map((p) => `<a class="sg-item" role="option" href="${productUrl(p)}"><span class="sg-img">${media(p)}</span><span><small>${esc(p.brand)}</small>${esc(p.name)}</span><b>${p.price ? fmt(p.price) : "Sur devis"}</b></a>`).join("") +
+        (res.length ? res.map((p) => `<a class="sg-item" role="option" href="${productUrl(p)}"><span class="sg-img">${media(p)}</span><span><small>${esc(p.brand)}</small>${esc(p.name)}</span><b>${p.price ? fmt(p.price) : esc(tr(NOPRICE))}</b></a>`).join("") +
           `<a class="sg-all" href="catalogue.html?q=${encodeURIComponent(q)}">${esc(t("Voir tous les résultats pour « {q} »", { q }))} →</a>`
           : `<p class="sg-empty">${esc(t("Aucun produit pour « {q} ».", { q }))} <a href="${wa(tr("Bonjour, je cherche :") + " " + q)}" target="_blank" rel="noopener">Demander à un conseiller</a></p>`);
       box.hidden = false; sel = -1;
@@ -299,7 +302,7 @@
     const dlg = $("#cmpdlg"), ps = Store.get().compare.map(D.findProduct), keys = [...new Set(ps.flatMap((p) => Object.keys(p.specs)))];
     const row = (l, f) => `<tr><th scope="row">${l}</th>${ps.map((p) => `<td>${f(p)}</td>`).join("")}</tr>`;
     dlg.innerHTML = `<div class="dlg-head"><h2>Comparer</h2><button class="hbtn js-dlg-close" aria-label="Fermer">${ic("close")}</button></div><div class="tscroll"><table class="cmp"><thead><tr><td></td>${ps.map((p) => `<th scope="col"><span class="cmp-img">${media(p)}</span><small>${esc(p.brand)}</small><a href="${productUrl(p)}">${esc(p.name)}</a></th>`).join("")}</tr></thead><tbody>
-      ${row("Prix", (p) => priceBlock(p))}${keys.map((k) => row(esc(k), (p) => esc(p.specs[k] || "—"))).join("")}${row("", (p) => p.price ? `<button class="btn btn--sm js-add" data-id="${p.id}">Ajouter</button>` : "")}</tbody></table></div>`;
+      ${row("Prix", (p) => priceBlock(p))}${keys.map((k) => row(esc(k), (p) => esc(p.specs[k] || "—"))).join("")}${row("", (p) => p.price || CARTNP ? `<button class="btn btn--sm js-add" data-id="${p.id}">Ajouter</button>` : "")}</tbody></table></div>`;
     dlg.showModal();
   }
 
@@ -359,5 +362,5 @@
     bindSearch(); counts(); reveal();
   }
 
-  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, sidePanel, catChips, norm };
+  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, sidePanel, catChips, norm, NOPRICE, CARTNP };
 })();

@@ -205,20 +205,83 @@ Papier toilette · 32 rouleaux|Papel higiénico · 32 rollos|Toilet paper · 32 
 Papier toilette double épaisseur · 4 rouleaux|Papel higiénico doble capa · 4 rollos|2-ply toilet paper · 4 rolls;Ventage Family;entretien;papier;1000;;1584556812945-a6830379555b
 Essuie-tout · 3 rouleaux|Papel de cocina · 3 rollos|Kitchen roll · 3 rolls;Style;entretien;papier;3500;4700;1598046937985-11c320dfd379
 Essuie-tout maxi · 2 rouleaux|Papel de cocina maxi · 2 rollos|Maxi kitchen roll · 2 rolls;Ventage Family;entretien;papier;2500;;1584109807991-ebfcd80112a8
-Biberon anti-colique 250 ml|Biberón anticólicos 250 ml|Anti-colic baby bottle 250 ml;Ventage Family;bebe-animaux;bebe;4500;;1623707430616-d9f956bcac2b
-Lait de toilette bébé 500 ml|Leche limpiadora bebé 500 ml|Baby cleansing milk 500 ml;Ventage Family;bebe-animaux;bebe;3800;;1716372409137-7ad0100d57ab
-Pâte à l'eau 75 ml|Pasta al agua 75 ml|Zinc nappy paste 75 ml;Biolane;bebe-animaux;bebe;4500;6400;1716372409156-b5d999f0b599
-Kit naissance couches & lotion|Kit nacimiento pañales y loción|Newborn kit · nappies & lotion;Ventage Family;bebe-animaux;bebe;15000;;1716972065448-e08a46809530
-Couches Baby Dry taille 5 · 48|Pañales Baby Dry talla 5 · 48|Baby Dry nappies size 5 · 48;Pampers;bebe-animaux;bebe;12400;17600;1584839404042-8bc21d240e91
-Croquettes chien adulte 4 kg|Pienso perro adulto 4 kg|Adult dog food 4 kg;Ventage Family;bebe-animaux;animaux;9500;;1714068691210-073dc52c6c1d
-Croquettes chien · sac 10 kg|Pienso para perros · saco 10 kg|Dog food · 10 kg sack;Ventage Family;bebe-animaux;animaux;19500;22000;1632236568054-12f36ecee2f6
-Gamelle & croquettes chiot 2 kg|Comedero y pienso cachorro 2 kg|Puppy bowl & food 2 kg;Ventage Family;bebe-animaux;animaux;6500;;1565674244283-993fb27a215f
-Croquettes chat stérilisé 2 kg|Pienso gato esterilizado 2 kg|Sterilised cat food 2 kg;Ventage Family;bebe-animaux;animaux;7500;;1616668983570-a971956d8928
+Biberon anti-colique 250 ml|Biberón anticólicos 250 ml|Anti-colic baby bottle 250 ml;Ventage Family;bebe;bebe-repas;4500;;1623707430616-d9f956bcac2b
+Lait de toilette bébé 500 ml|Leche limpiadora bebé 500 ml|Baby cleansing milk 500 ml;Ventage Family;bebe;bebe-soins;3800;;1716372409137-7ad0100d57ab
+Pâte à l'eau 75 ml|Pasta al agua 75 ml|Zinc nappy paste 75 ml;Biolane;bebe;bebe-soins;4500;6400;1716372409156-b5d999f0b599
+Kit naissance couches & lotion|Kit nacimiento pañales y loción|Newborn kit · nappies & lotion;Ventage Family;bebe;bebe-soins;15000;;1716972065448-e08a46809530
+Couches Baby Dry taille 5 · 48|Pañales Baby Dry talla 5 · 48|Baby Dry nappies size 5 · 48;Pampers;bebe;bebe-soins;12400;17600;1584839404042-8bc21d240e91
+Croquettes chien adulte 4 kg|Pienso perro adulto 4 kg|Adult dog food 4 kg;Ventage Family;animalerie;chiens;9500;;1714068691210-073dc52c6c1d
+Croquettes chien · sac 10 kg|Pienso para perros · saco 10 kg|Dog food · 10 kg sack;Ventage Family;animalerie;chiens;19500;22000;1632236568054-12f36ecee2f6
+Gamelle & croquettes chiot 2 kg|Comedero y pienso cachorro 2 kg|Puppy bowl & food 2 kg;Ventage Family;animalerie;chiens;6500;;1565674244283-993fb27a215f
+Croquettes chat stérilisé 2 kg|Pienso gato esterilizado 2 kg|Sterilised cat food 2 kg;Ventage Family;animalerie;chats;7500;;1616668983570-a971956d8928
+Fraises · barquette 500 g|Fresas · tarrina 500 g|Strawberries · 500 g punnet;Ventage Family;frais;fruits-legumes;3500;;1601004890684-d8cbf643f5f2
+Fraises · plateau 2 kg|Fresas · bandeja 2 kg|Strawberries · 2 kg tray;Ventage Family;frais;fruits-legumes;12000;14000;1587393855524-087f83d95bc9
+Kiwis & fraises · coupe fraîcheur|Kiwis y fresas · copa fresca|Kiwi & strawberry fruit cup;Ventage Family;frais;fruits-legumes;2500;;1733584328901-158b395e7b5d
+Salade de fruits · bol 500 g|Macedonia · bol 500 g|Fruit salad · 500 g bowl;Ventage Family;frais;fruits-legumes;2800;;1592500077012-dc7ca4eff224
+Corbeille pastèque garnie|Cesta de sandía con frutas|Fruit-filled watermelon basket;Ventage Family;frais;fruits-legumes;9500;;1773190060066-473e6096cf71
+Patates douces · le kg|Boniatos · el kg|Sweet potatoes · per kg;Ventage Family;frais;fruits-legumes;1000;;1730815048561-45df6f7f331d
+Patates douces · panier 3 kg|Boniatos · cesta 3 kg|Sweet potatoes · 3 kg basket;Ventage Family;frais;fruits-legumes;2700;;1744659749700-c4213f840355
+Brocolis · pièce|Brócoli · unidad|Broccoli, each;Ventage Family;frais;fruits-legumes;1500;;1624915448103-d3e77681d39a
+Champignons de Paris · 250 g|Champiñones · 250 g|Button mushrooms · 250 g;Ventage Family;frais;fruits-legumes;1800;;1634210117453-b652a4a224bc
+Brocolis & champignons · duo|Brócoli y champiñones · dúo|Broccoli & mushroom duo;Ventage Family;frais;fruits-legumes;3000;;1760108273029-3bdb43fe8788
+Noix de coco sèche · pièce|Coco seco · unidad|Dry coconut, each;Ventage Family;frais;fruits-legumes;500;;1567567278636-c8fa119561be
+Carré d'agneau · le kg|Costillar de cordero · el kg|Rack of lamb · per kg;Ventage Family;frais;boucherie;14000;;1766589152343-874c0e138262
+Saucisses fraîches · 6 pièces|Salchichas frescas · 6 unidades|Fresh sausages · 6 pieces;Ventage Family;frais;boucherie;3000;;1584699006710-3ad3b82fce7f
+Merguez · 500 g|Merguez · 500 g|Merguez sausages · 500 g;Ventage Family;frais;boucherie;3500;;1648722750947-a9614ffd359e
+Plateau grillades agneau & saucisses|Bandeja parrillada cordero y salchichas|Lamb & sausage grill platter;Ventage Family;frais;boucherie;16000;18500;1766589152283-560b6d0d0fb6
+Fromage affiné en tranches · 200 g|Queso curado en lonchas · 200 g|Aged cheese slices · 200 g;Ventage Family;frais;cremerie;3200;;1589881133595-a3c085cb731d
+Fromage de chèvre · 150 g|Queso de cabra · 150 g|Goat's cheese · 150 g;Ventage Family;frais;cremerie;3500;;1683314573424-b0da0c795a07
+Plateau de fromages · 4 variétés|Tabla de quesos · 4 variedades|Cheese board · 4 varieties;Ventage Family;frais;cremerie;12000;;1654513547430-973fe7570159
+Fromages en portions · 8 triangles|Quesitos · 8 porciones|Cheese wedges · 8 portions;Ventage Family;frais;cremerie;1900;;1770833255726-5db635f26abd
+Crème fouettée · 250 ml|Nata montada · 250 ml|Whipped cream · 250 ml;Ventage Family;frais;cremerie;1800;;1633893215271-f7e1fca081ad
+Donuts glacés · boîte de 6|Donuts glaseados · caja de 6|Glazed doughnuts · box of 6;Ventage Family;frais;boulangerie;3600;;1549203507-11b356cf6635
+Cupcakes assortis · boîte de 6|Cupcakes variados · caja de 6|Assorted cupcakes · box of 6;Ventage Family;frais;boulangerie;4800;;1561741403-3f7c1f93d0a3
+Cupcakes chocolat · lot de 4|Cupcakes de chocolate · pack de 4|Chocolate cupcakes · 4-pack;Ventage Family;frais;boulangerie;3200;;1596313050598-ba4cdecf1404
+Muffins vanille · lot de 3|Magdalenas de vainilla · pack de 3|Vanilla muffins · 3-pack;Ventage Family;frais;boulangerie;2200;;1732290136256-702cc4c030c0
+Brioches dorées · plaque de 6|Bollos dorados · bandeja de 6|Golden brioche buns · tray of 6;Ventage Family;frais;boulangerie;2800;;1617450743602-6cc770046ceb
+Nouilles instantanées · carton de 24|Fideos instantáneos · caja de 24|Instant noodles · case of 24;Ventage Family;epicerie;base;6500;7500;1713632228455-8a15e0481ca1
+Nouilles en pot · lot de 6|Fideos en vaso · pack de 6|Cup noodles · 6-pack;Ventage Family;epicerie;base;3600;;1766871138860-bff0f7a91395
+Olives vertes · bocal 350 g|Aceitunas verdes · tarro 350 g|Green olives · 350 g jar;Ventage Family;epicerie;conserves;1900;;1729655107196-3a4ceb9b9034
+Olives vertes dénoyautées · 200 g|Aceitunas sin hueso · 200 g|Pitted green olives · 200 g;Ventage Family;epicerie;conserves;1500;;1708949124687-8de24592d365
+Cornichons & légumes au vinaigre · bocal|Encurtidos variados · tarro|Pickled gherkins & vegetables · jar;Ventage Family;epicerie;conserves;2200;;1645679057638-e435c5347798
+Sauce piment habanero 150 ml|Salsa picante habanero 150 ml|Habanero hot sauce 150 ml;Ventage Family;epicerie;huiles-epices;1800;;1694370477525-bfb30bb061c8
+Sauce pimentée rouge 250 ml|Salsa picante roja 250 ml|Red chilli sauce 250 ml;Ventage Family;epicerie;huiles-epices;1500;;1700619773778-f02b45ca0616
+Pop-corn caramel coloré 200 g|Palomitas de colores 200 g|Coloured caramel popcorn 200 g;Ventage Family;epicerie;biscuits;1800;;1709019651983-6714a8dd3edf
+Maïs à pop-corn 500 g|Maíz para palomitas 500 g|Popcorn kernels 500 g;Ventage Family;epicerie;biscuits;1200;;1700160582079-25ffe7f3bd9c
+Bonbons acidulés · bocal 500 g|Caramelos ácidos · tarro 500 g|Sour sweets · 500 g jar;Ventage Family;epicerie;biscuits;2500;;1566214405089-8a89b08d2bba
+Bonbons candy corn 250 g|Caramelos candy corn 250 g|Candy corn 250 g;Ventage Family;epicerie;biscuits;1500;;1709019651997-a0688755cd18
+Coco frais à boire|Coco fresco para beber|Fresh drinking coconut;Ventage Family;boissons;eaux-jus;800;;1568684333866-b89af98d349e
+Boisson énergisante 50 cl|Bebida energética 50 cl|Energy drink 50 cl;Monster;boissons;sodas;1500;;1622543925917-763c34d1a86e
+Boisson énergisante 25 cl|Bebida energética 25 cl|Energy drink 25 cl;Red Bull;boissons;sodas;1300;;1642532560930-77d5018c68f7
+Boisson énergisante Ultra zéro sucre 50 cl|Bebida energética Ultra sin azúcar 50 cl|Zero-sugar Ultra energy drink 50 cl;Monster;boissons;sodas;1500;;1765278339412-b3d507bcb796
+Sodas canettes · lot de 4|Refrescos en lata · pack de 4|Soda cans · 4-pack;Ventage Family;boissons;sodas;2400;;1677177751361-0416255ff002
+Champagne brut 75 cl|Champán brut 75 cl|Brut champagne 75 cl;Ventage Family;boissons;alcools;35000;;1643618829236-a23857519fb6
+Mousseux brut 75 cl|Espumoso brut 75 cl|Brut sparkling wine 75 cl;Ventage Family;boissons;alcools;9500;;1623428454697-08da4a100602
+Bougies parfumées · lot de 3|Velas perfumadas · pack de 3|Scented candles · 3-pack;Ventage Family;entretien;menage;4500;;1643122966676-29e8597257f7
+Bougies blanches · lot de 10|Velas blancas · pack de 10|White candles · 10-pack;Ventage Family;entretien;menage;2000;;1624479163091-3c000402218d
+Allumettes · lot de 10 boîtes|Cerillas · pack de 10 cajas|Matches · 10 boxes;Ventage Family;entretien;menage;800;;1646617653720-c1b0e9179ec4
+Éponges grattantes · lot de 6|Estropajos · pack de 6|Scouring sponges · 6-pack;Ventage Family;entretien;menage;1200;;1721060581444-dbd5296215ff
+Éponges multi-usages · lot de 10|Esponjas multiusos · pack de 10|Multi-purpose sponges · 10-pack;Ventage Family;entretien;menage;1800;;1646209624081-a1e99efeaea1
+Sucettes physiologiques · lot de 2|Chupetes · pack de 2|Orthodontic dummies · 2-pack;Ventage Family;bebe;bebe-soins;2500;;1707006049284-14916dc80160
+Petits pots fruits & légumes · lot de 6|Potitos de frutas y verduras · pack de 6|Fruit & veg baby jars · 6-pack;Ventage Family;bebe;bebe-repas;5500;;1793727669323-0683eacc627a
+Sac à langer équipé|Bolso cambiador equipado|Equipped changing bag;Ventage Family;bebe;bebe-soins;18000;21000;1734599397715-f030c6d206a0
+Croquettes chat adulte 1,5 kg|Pienso gato adulto 1,5 kg|Adult cat food 1.5 kg;Ventage Family;animalerie;chats;5500;;1764576504536-dbdfa4cb1d9a
+Pâtée pour chat · 12 sachets|Comida húmeda para gato · 12 sobres|Wet cat food · 12 pouches;Ventage Family;animalerie;chats;6500;;1571151596869-2663a84c1e41
+Gamelle céramique surélevée pour chat|Comedero elevado de cerámica para gato|Raised ceramic cat bowl;Ventage Family;animalerie;chats;5500;;1787295145690-4ef1e08db667
+Croquettes chaton 1 kg|Pienso gatito 1 kg|Kitten food 1 kg;Ventage Family;animalerie;chats;4500;;1774797405267-7c452cb85652
+Fontaine & gamelle pour chat|Fuente y comedero para gato|Cat water fountain & bowl;Ventage Family;animalerie;chats;12000;;1722267432520-24755f9e218d
+Friandises os pour chien · 500 g|Premios huesitos para perro · 500 g|Bone-shaped dog treats · 500 g;Ventage Family;animalerie;chiens;3000;;1568640347023-a616a30bc3bd
+Peluche pour chien|Peluche para perro|Plush dog toy;Ventage Family;animalerie;chiens;4000;;1591946614720-90a587da4a36
+Jouet à mâcher · taille M|Juguete para morder · talla M|Chew toy · size M;Kong;animalerie;chiens;6500;;1535294435445-d7249524ef2e
+Jouet corde & peluche chiot|Juguete cuerda y peluche cachorro|Puppy rope & plush toy;Ventage Family;animalerie;chiens;3500;;1627323721367-94128c3fa0f7
+Balles pour chien · lot de 3|Pelotas para perro · pack de 3|Dog balls · 3-pack;Ventage Family;animalerie;chiens;2500;;1722257401181-a04cc4df36f8
+Friandises protéinées chien · 200 g|Snacks proteicos para perro · 200 g|Protein dog puffs · 200 g;Ventage Family;animalerie;chiens;3500;;1747577672101-f4cd34bcedd4
+Pâtée pour chien · 4 × 300 g|Comida húmeda para perro · 4 × 300 g|Wet dog food · 4 × 300 g;Ventage Family;animalerie;chiens;5000;;1695169954725-fa757fd7315c
 """
 
 ICON = {"fruits-legumes": "basket", "boucherie": "fish", "cremerie": "cup", "boulangerie": "basket", "surgeles": "basket", "base": "basket",
         "conserves": "can", "huiles-epices": "bottle", "petit-dej": "cup", "biscuits": "basket", "eaux-jus": "bottle", "sodas": "bottle",
-        "cafe-the": "cup", "alcools": "bottle", "menage": "spray", "hygiene": "soap", "papier": "soap", "bebe": "baby", "animaux": "basket"}
+        "cafe-the": "cup", "alcools": "bottle", "menage": "spray", "hygiene": "soap", "papier": "soap", "bebe": "baby", "animaux": "basket", "bebe-soins": "baby", "bebe-repas": "baby", "chiens": "basket", "chats": "basket"}
 
 def rows():
     out = []
