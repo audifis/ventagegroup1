@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Showroom — Ventage Group · Malabo</title>
+<meta name="description" content="Showroom Ventage Group à Malabo : catalogue, offres et commande assistée sur WhatsApp.">
+<meta name="theme-color" content="#0a1430">
+<meta property="og:type" content="website"><meta property="og:title" content="Ventage Group · Malabo"><meta property="og:locale" content="fr_FR">
+<link rel="icon" href="assets/ventage-check.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://ventagegroup.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body data-page="home">
+
+<!-- Rideau d'ouverture -->
+<div class="theatre" id="theatre" aria-hidden="true">
+  <div class="stage-glow"></div>
+  <div class="curtain c-left"></div>
+  <div class="curtain c-right"></div>
+  <div class="valance"><div class="valance-band"></div><div class="swags"></div></div>
+  <div class="plaque">
+    <span class="plaque-pre">Ventage Group présente</span>
+    <img class="vg-check" src="assets/ventage-check.png" alt="" width="48" height="54">
+    <span class="plaque-name" id="pl-name" data-noi18n></span>
+    <span class="plaque-title" id="pl-title"></span>
+    <span class="plaque-line"></span>
+  </div>
+  <button class="theatre-skip" type="button">Entrer ›</button>
+</div>
+
+<div id="site-header"></div>
+<main id="main">
+
+<section class="hero" id="hero" aria-roledescription="carrousel" aria-label="À la une">
+  <div class="slides" id="slides"></div>
+  <div class="hero-ui wrap">
+    <div class="dots" role="tablist" aria-label="Diapositives" id="dots"></div>
+    <div class="hero-arrows"><button class="harr" data-d="-1" aria-label="Précédent"></button><button class="harr" data-d="1" aria-label="Suivant"></button><button class="harr hpause" aria-label="Pause"></button></div>
+  </div>
+</section>
+
+<section class="promobar" id="promobar"><div class="wrap promobar-in" data-reveal>
+  <span class="pb-tag" id="pb-tag"></span>
+  <span class="pb-big" id="pb-big"></span>
+  <span class="pb-txt">sur une sélection du showroom</span>
+  <a class="btn btn--gold btn--sm" href="catalogue.html?promo=1">J'en profite</a>
+</div></section>
+
+<section class="sec sec--tight">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><h2 class="h2">Nos rayons</h2><a class="more" href="catalogue.html">Tout le catalogue</a></div>
+    <div class="cats" id="cats"></div>
+  </div>
+</section>
+
+<section class="flash" id="flash-sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal>
+      <div><span class="kicker">Offres du jour</span><h2 class="h2">Ventes flash</h2></div>
+      <div class="countdown" aria-label="Temps restant"><span>Se termine dans</span><b id="cd-h">00</b>:<b id="cd-m">00</b>:<b id="cd-s">00</b></div>
+    </div>
+    <div class="rail-wrap"><button class="rail-btn prev" aria-label="Précédent"></button><div class="rail" id="flash"></div><button class="rail-btn next" aria-label="Suivant"></button></div>
+  </div>
+</section>
+
+<section class="sec sec--tight" id="duo-sec">
+  <div class="wrap duo" id="duo"></div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><h2 class="h2" id="sel-t"></h2>
+      <div class="tabs" role="tablist" id="tabs"></div></div>
+    <div class="grid" id="tabgrid"></div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--sand)" id="visit-sec">
+  <div class="wrap visit">
+    <div class="visit-ph" id="visit-ph"></div>
+    <div class="visit-copy" data-reveal>
+      <span class="kicker">Le showroom</span>
+      <h2 class="h2" id="visit-t"></h2>
+      <p class="lead" id="visit-p" style="margin:0"></p>
+      <dl id="visit-dl"></dl>
+      <div class="row" style="display:flex;gap:12px;flex-wrap:wrap"><a class="btn btn--wa js-wa" href="#" target="_blank" rel="noopener" id="visit-wa"></a><a class="btn btn--line" href="contact.html">Plan & contact</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="rail2-sec">
+  <div class="wrap">
+    <div class="sec-head" data-reveal><div><span class="kicker" id="r2-k"></span><h2 class="h2" id="r2-t"></h2></div><a class="more" id="r2-more" href="catalogue.html">Tout voir</a></div>
+    <div class="rail-wrap"><button class="rail-btn prev" aria-label="Précédent"></button><div class="rail" id="rail2"></div><button class="rail-btn next" aria-label="Suivant"></button></div>
+  </div>
+</section>
+
+<section class="pro" id="pro-block" hidden>
+  <div class="pro-bg" id="pro-bg"></div>
+  <div class="wrap pro-in" data-reveal>
+    <span class="kicker">Ventage Pro</span>
+    <h2 class="h2">Votre projet,<br><em>clé en main.</em></h2>
+    <p>Entreprises, chantiers, hôtels, administrations : un conseiller dédié, des tarifs volume et un devis consolidé pour tout le groupe Ventage.</p>
+    <ul class="pro-pts"><li><b>Devis sur mesure</b>Volumes, délais, budget</li><li><b>Un interlocuteur unique</b>Du choix à la livraison</li><li><b>Douze showrooms</b>Un seul devis pour tout le groupe</li></ul>
+    <div class="ctas"><a class="btn btn--gold btn--lg js-wa-pro" href="#" target="_blank" rel="noopener">Demander un devis</a><a class="btn btn--glass btn--lg" href="contact.html#pro">Espace Pro</a></div>
+  </div>
+</section>
+
+<section class="brands" aria-label="Nos marques" id="brands-sec">
+  <div class="marquee"><div class="marquee-track" id="brands"></div></div>
+</section>
+
+</main>
+<div id="site-footer"></div>
+<div class="lb" id="lb" role="dialog" aria-label="Photos du showroom"><img alt=""><span class="lb-cap" id="lb-cap"></span><button class="lb-p" aria-label="Précédent"></button><button class="lb-n" aria-label="Suivant"></button><button class="lb-x" aria-label="Fermer"></button></div>
+
+<script src="js/catalog.js"></script>
+<script src="js/config.js"></script>
+<script src="js/data.js"></script>
+<script src="js/i18n-data.js"></script>
+<script src="js/vg-i18n.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/store.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/showroom.js"></script>
+</body>
+</html>
