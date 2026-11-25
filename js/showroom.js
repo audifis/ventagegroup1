@@ -100,7 +100,8 @@
   let favN = 0; try { favN = Store.get().favs.length; } catch (e) {}
   const offers = [["catalogue.html?promo=1", "tag", "Promotions", promos.length], ["catalogue.html?sort=new", "spark", "Nouveautés", cnt((p) => p.isNew)],
     ["catalogue.html?sort=best", "star", "Meilleures ventes", cnt((p) => p.best)], ["catalogue.html?fav=1", "heart", "Mes favoris", favN]].filter((o) => o[3] || o[2] === "Mes favoris");
-  $("#srside").innerHTML = `<div class="sbox sbox--q" id="sside-q"></div>
+  $("#srside").innerHTML = `<div class="sp-head"><b>${esc(C.name)}</b><button class="sp-x js-spclose" type="button" aria-label="${esc(tr("Fermer"))}">${U.ic("close")}</button></div>
+    <div class="sbox sbox--q" id="sside-q"></div>
     <div class="sbox"><h3>${esc(tr("Rayons"))}</h3><nav class="srays">${D.categories.map((c) => `<div class="sray">
         <a href="catalogue.html?cat=${c.id}"><span class="sray-ic">${U.ic(c.icon)}</span><span class="sray-l">${esc(c.label)}</span><small>${cnt((p) => p.category === c.id)}</small></a>
         ${c.subs.length > 1 ? `<button class="sray-tg" type="button" aria-expanded="false" aria-label="${esc(c.label)}">${U.ic("right")}</button>
@@ -110,6 +111,8 @@
     <div class="scard"><small>${esc(tr("Le showroom"))}</small><b>${esc(C.name)}</b><span>${esc(C.hours || tr("Du lundi au samedi"))}</span>
       <a class="btn btn--wa btn--sm js-wa" href="#" target="_blank" rel="noopener">${U.waIcon} ${esc(tr("Écrire au showroom"))}</a></div>`;
   U.sideSearch($("#sside-q"));
+  U.sidePanel($("#srside"));
+  U.catChips($("#srbar"));
   $$(".sray-tg").forEach((b) => b.addEventListener("click", () => {
     const open = b.getAttribute("aria-expanded") !== "true";
     b.setAttribute("aria-expanded", open); b.nextElementSibling.hidden = !open; b.parentElement.classList.toggle("open", open);

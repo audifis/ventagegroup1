@@ -89,8 +89,11 @@
     else if (t.id === "f-max") st.max = +t.value || "";
     update();
   });
-  $("#fpanel").addEventListener("click", (e) => { if (e.target.closest(".js-fclose")) $("#fpanel").classList.remove("open"); });
-  $("#ftoggle").addEventListener("click", () => $("#fpanel").classList.add("open"));
+  $("#fsearch").insertAdjacentHTML("beforebegin", `<div class="sp-head"><b>${U.esc(tr("Rayons & filtres"))}</b><button class="sp-x js-spclose" type="button" aria-label="${U.esc(tr("Fermer"))}">${U.ic("close")}</button></div>`);
+  const sp = U.sidePanel($("#fpanel"));
+  $("#fpanel").addEventListener("click", (e) => { if (e.target.closest(".js-fclose")) sp.close(); });
+  $("#ftoggle").addEventListener("click", sp.open);
+  U.catChips($("#srbar"), st.cat);
   $("#sort").addEventListener("change", (e) => { st.sort = e.target.value; render(); sync(); });
   const qt = $("#q-top"); if (qt) qt.value = st.q;
   document.addEventListener("store:change", () => { if (st.fav) render(); });

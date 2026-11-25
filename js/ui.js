@@ -251,6 +251,29 @@
     return i;
   }
 
+  /* ——— Panneau latéral : colonne fixe sur ordinateur, tiroir depuis la gauche sur mobile ——— */
+  const isMob = () => matchMedia("(max-width:1024px)").matches;
+  function sidePanel(panel) {
+    const ov = document.createElement("div"); ov.className = "sp-ov"; document.body.appendChild(ov);
+    const open = () => { panel.classList.add("open"); ov.classList.add("on"); document.body.classList.add("sp-lock"); };
+    const close = () => { panel.classList.remove("open"); ov.classList.remove("on"); document.body.classList.remove("sp-lock"); };
+    ov.addEventListener("click", close);
+    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && panel.classList.contains("open")) close(); });
+    document.addEventListener("click", (e) => {
+      if (e.target.closest(".js-spopen") || (e.target.closest(".tabbar .js-open-drawer") && isMob())) { e.preventDefault(); e.stopImmediatePropagation(); open(); }
+      else if (e.target.closest(".js-spclose")) { e.preventDefault(); close(); }
+    }, true);
+    let x0 = null;
+    panel.addEventListener("touchstart", (e) => (x0 = e.touches[0].clientX), { passive: true });
+    panel.addEventListener("touchend", (e) => { if (x0 != null && x0 - e.changedTouches[0].clientX > 70) close(); x0 = null; });
+    return { open, close };
+  }
+  /* Rangée de rayons défilante (mobile) : bouton « Rayons » + un raccourci par rayon */
+  function catChips(el, active) {
+    el.innerHTML = `<button class="srbar-menu js-spopen" type="button">${ic("menu")}<span>${esc(tr("Rayons"))}</span></button>` +
+      D.categories.map((c) => `<a class="${c.id === active ? "on" : ""}" href="catalogue.html?cat=${c.id}"><span class="sray-ic">${ic(c.icon)}</span>${esc(c.short || c.label)}</a>`).join("");
+  }
+
   /* ——— Toast, compteurs, comparateur ——— */
   let tt;
   function toast(msg, link) {
@@ -332,5 +355,5 @@
     bindSearch(); counts(); reveal();
   }
 
-  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, norm };
+  window.SODISCOM_UI = { vm, url, maxOff, remote, opt, rimg, djN, djUrl, t, tr, src, mount, card, media, pimg, scene, studio, ic, waIcon, wa, esc, fmt, priceBlock, productUrl, toast, reveal, searchProducts, sideSearch, sidePanel, catChips, norm };
 })();

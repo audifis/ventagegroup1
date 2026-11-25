@@ -24,3 +24,6 @@ Chaque showroom a son propre panier (stockage `ventage:<id>`) et envoie la comma
 
 ## En ligne
 https://ventage-group.vercel.app — déployé automatiquement par Vercel à chaque push sur `main` (dépôt audifis/ventagegroup1).
+
+## Mise à jour
+Après toute modification de CSS/JS : `python3 tools/stamp.py` (versionne les fichiers pour que les navigateurs chargent la nouvelle version), puis commit + push.

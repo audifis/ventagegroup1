@@ -1,6 +1,7 @@
 /* Traductions des textes propres à Ventage (s'ajoutent au dictionnaire de la boutique). */
 window.VG_UI = {
 "es": {
+"Rayons & filtres": "Secciones y filtros",
 "Rechercher un article…": "Buscar un artículo…",
 "Demander à un conseiller": "Preguntar a un asesor",
 "Nos 12 showrooms": "Nuestros 12 showrooms",
@@ -60,6 +61,7 @@ window.VG_UI = {
 "Ventage Group · 12 showrooms": "Ventage Group · 12 showrooms"
 },
 "en": {
+"Rayons & filtres": "Departments & filters",
 "Rechercher un article…": "Search products…",
 "Demander à un conseiller": "Ask an advisor",
 "Nos 12 showrooms": "Our 12 showrooms",
